@@ -25,15 +25,8 @@ def similar(w1,w2):
     return float(tot/len(w1)*100)
 
 @lru_cache()
-def grid(x,y,inc):
-    if x>=500:
-        return 
-    else:
-        draw.line(screen, (0,255,0), (x,y), (x,y+500))
-        draw.line(screen, (0,255,0), (y,x), (y+500,x))
-        time.wait(10)
-        display.flip()
-        return grid(x+inc,y,inc)
-
+def grid(x,y):
+    if x>=10:
+        
 screen = display.set_mode((500,500))
 screen.fill((0,0,0))
