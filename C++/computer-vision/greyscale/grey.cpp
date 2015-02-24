@@ -19,10 +19,10 @@ int main(int argc,char** argv) {
 	string rgb_file_name = argv[1], gray_file_name = argv[1];
 
 	//initializing image matrices
-	Mat rgb,gray;
+	Mat rgb, gray;
 
 	//loading the rgb image
-	rgb = imread(rgb_file_name,-1);
+	rgb = imread(rgb_file_name, 1);
 	cout << "Openening image" << rgb_file_name << "...";
 	if(!rgb.data)//checkig for correctly image loaded
 	{
