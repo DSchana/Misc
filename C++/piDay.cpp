@@ -11,7 +11,7 @@ int pies(int n, int k, int prev) {
 	}
 	else {
 		int tot = 0;
-		for (int i = 1; i < n-k+2; ++i) {
+		for (int i = 1; i < n-k+2; i++) {
 			if (i >= prev) {
 				tot += pies(n-i, k-1, i);
 			}

@@ -7,7 +7,7 @@ def numFactors(n):
     tot = 0
     for i in range(1,n+1):
         if n%i == 0:
-            tot += 1
+            tot += 1 
 
     return tot
 
@@ -37,35 +37,32 @@ def grid(x,y,size,lim):
     display.flip()
 
 # fix
-def lightning(x,y,size):
-    ang = randint(20,150)
-    x2 = x + cos(radians(ang)) * size
-    y2 = y + sin(radians(ang)) * size
-    draw.line(screen, (255, 255, 0), (x, y), (x2, y2), 3)
-    if y2 < screen.get_height():
-        if y2 <= screen.get_height()/2:
-            rate = randint(1,9)
-            if rate % 3 == 0:
-                rep = 3
-            elif rate % 2 == 0:
-                rep = 2
-            else:
-                rep = 1
-        else:
-            rep = randint(0,3)
-        if rep == 0 or rep == 1 or rep == 3:
-            for i in range(rep):
-                lightning(x2, y2, size)
+@lru_cache()
+def lightning(x,y):
+    top = [0,0,0,0,0,0,1,1,1,1,2,2]
+    bot = [1,1,1,1,1,1,1,1,1,2,2,2]
+    shuffle(top)
+    shuffle(bot)
+    if y < screen.get_height()/2:
+        branch = top[0]
+    else:
+        branch = bot[0]
+    for i in range(branch):
+        ang = randint(-40, 40)
+        down = randint(30, 50)
+        draw.line(screen, (255, 255, 0), (x, y), (x+ang, y+down), 2)
+        display.flip()
+        lightning(x+ang, y+down)
 
 def star(x,y,size,col):
     points = []
-    points.append((x-(108*size)/4*sin(radians(18)), y-size/4))
+    points.append((x-(10*size)/2*sin(radians(18)), y-size/2))
     points.append((x,y-size))
-    points.append((x+(108*size)/4*sin(radians(18)), y-size/4))
+    points.append((x+(10*size)/2*sin(radians(18)), y-size/2))
     for i in range(len(points)-1):
         draw.line(screen, col, points[i], points[i+1],3)
 
-def clock(hr, m, sec):
+def clock(h, m, s):
     draw.circle(screen, (255, 255, 255), (512, 300), 100)
 
 screen = display.set_mode((1024,600))
@@ -77,8 +74,9 @@ while running:
         if e.type == QUIT:
             running = False
 
-    star(512, 300, 30, (255, 0, 0))
+    screen.fill((0,0,0))
+    lightning(512, 0)
     
     display.flip()
-
+    time.delay(300)
 quit()
