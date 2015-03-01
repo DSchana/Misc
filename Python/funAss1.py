@@ -55,12 +55,23 @@ def lightning(x,y):
         lightning(x+ang, y+down)
 
 def star(x,y,size,col):
+    d1 = int(3*size/4)
+    d2 = int(size/4)
     points = []
-    points.append((x-(10*size)/2*sin(radians(18)), y-size/2))
-    points.append((x,y-size))
-    points.append((x+(10*size)/2*sin(radians(18)), y-size/2))
-    for i in range(len(points)-1):
-        draw.line(screen, col, points[i], points[i+1],3)
+    points.append((x, y+(size*sin(radians(18))/sin(radians(72)))))
+    points.append((x-(size*sin(radians(18))/sin(radians(72))+(d1/sin(radians(72)))*sin(radians(18))), y+(d1/sin(radians(72)))*sin(radians(72))))
+    points.append((x-(size*sin(radians(18))/sin(radians(72))), y))
+    points.append((x-((d1*sin(radians(18)))+d1)/sin(radians(72)), y-d2))
+    points.append((x-(d1*sin(radians(18))/sin(radians(72))), y-d2))
+    
+    points.append((x, y-size))
+    points.append((x+(d1*sin(radians(18))/sin(radians(72))), y-d2))
+    points.append((x+((d1*sin(radians(18)))+d1)/sin(radians(72)), y-d2))
+    points.append((x+(size*sin(radians(18))/sin(radians(72))), y))
+    points.append((x+(size*sin(radians(18))/sin(radians(72))+(d1/sin(radians(72)))*sin(radians(18))), y+(d1/sin(radians(72)))*sin(radians(72))))
+
+    draw.lines(screen, col, True, points, 2)
+    draw.circle(screen, col, (x, y), 3)  # temporary
 
 def clock(h, m, s):
     draw.circle(screen, (255, 255, 255), (512, 300), 100)
@@ -74,9 +85,7 @@ while running:
         if e.type == QUIT:
             running = False
 
-    screen.fill((0,0,0))
-    lightning(512, 0)
+    star(512, 300, 300, (255, 0, 0))
     
     display.flip()
-    time.delay(300)
 quit()
