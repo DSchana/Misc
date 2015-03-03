@@ -19,7 +19,7 @@ string add (string &s1, string &s2) {
 	 	sum = (min[i] - '0' ) + (max[i + max.length() - min.length()] - '0') + carry;
 
 		carry = sum/10;
-	 	sum %= 10;
+	 	sum %= ch10;
 
 	 	result = (char)(sum + '0') + result;
 	}

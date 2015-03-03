@@ -36,11 +36,9 @@ def grid(x,y,size,lim):
         grid(x+size//2, y+size//2, size//2, lim)
     display.flip()
 
-# fix
-@lru_cache()
 def lightning(x,y):
-    top = [0,0,0,0,0,0,1,1,1,1,2,2]
-    bot = [1,1,1,1,1,1,1,1,1,2,2,2]
+    top = [1,1,1,1,1,1,1,1,1,2,2,2]
+    bot = [0,0,1,1,1,1,1,2,2,2,2,2]
     shuffle(top)
     shuffle(bot)
     if y < screen.get_height()/2:
@@ -51,8 +49,8 @@ def lightning(x,y):
         ang = randint(-40, 40)
         down = randint(30, 50)
         draw.line(screen, (255, 255, 0), (x, y), (x+ang, y+down), 2)
-        display.flip()
-        lightning(x+ang, y+down)
+        if y<screen.get_height():
+            lightning(x+ang, y+down)
 
 def star(x,y,size,col):
     d1 = int(3*size/4)
@@ -85,7 +83,9 @@ while running:
         if e.type == QUIT:
             running = False
 
-    star(512, 300, 300, (255, 0, 0))
+    screen.fill((0,0,0))
+    lightning(512, 0)
+    time.delay(500)
     
     display.flip()
 quit()
