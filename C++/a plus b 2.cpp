@@ -7,7 +7,6 @@ string add (string &s1, string &s2) {
 
 	string  min=s1, max=s2, result = "";
 
-	// Finds the bigger string
 	if (s1.length()>s2.length()){
 		max = s1;
 		min = s2;
@@ -20,7 +19,7 @@ string add (string &s1, string &s2) {
 	 	sum = (min[i] - '0' ) + (max[i + max.length() - min.length()] - '0') + carry;
 
 		carry = sum/10;
-	 	sum %=10;
+	 	sum %= 10;
 
 	 	result = (char)(sum + '0') + result;
 	}
