@@ -4,14 +4,13 @@
 
 using namespace std;
 
+int primeNums(int n) {
+	int primes[n]
+}
+
 int main() {
 	int n, check = 3;
 	cin >> n
-	int primes[n];
-	primes[0] = 2;
-	for (int i = 1; i<n; i++) {
-
-	}
 
 	return 0;
 }
