@@ -73,25 +73,28 @@ def star(x,y,size,col):
     draw.circle(screen, col, (x, y), 3)  # temporary
 
 def clock(h, m, s):
-    draw.circle(screen, (255, 255, 255), (512, 300), 100)
+    draw.circle(screen, (0, 0, 0), (512, 300), 100)
+    draw.circle(screen, (255, 255, 255), (512, 300), 100, 3)
 
     ls = 85
     lm = 85
     lh = 70
 
     ang_s = s*6
-    ang_m = m*0.1
-    ang_h = h*0.4
+    ang_m = m*(1/10)
+    ang_h = h*(1/40)
 
-    s1, m1, h1 = (512, 300)
+    s1 = (512, 300)
+    m1 = (512, 300)
+    h1 = (512, 300)
 
-    s2 = (512 + (ls*sin(radians(ang_s))), 300 + (ls*cos(radians(ang_s))))
-    m2 = (512 + (lm*sin(radians(ang_m))), 300 + (lm*cos(radians(ang_m))))
-    h2 = (512 + (lh*sin(radians(ang_h))), 300 + (lh*cos(radians(ang_h))))
+    s2 = (512 + (ls*sin(radians(ang_s))), 300 - (ls*cos(radians(ang_s))))
+    m2 = (512 + (lm*sin(radians(ang_m))), 300 - (lm*cos(radians(ang_m))))
+    h2 = (512 + (lh*sin(radians(ang_h))), 300 - (lh*cos(radians(ang_h))))
 
-    draw.line(screen, (255, 0, 0), s1, s2, 3)
-    draw.line(screen, (255, 0, 0), m1, m2, 3)
-    draw.line(screen, (255, 0, 0), h1, h2, 3)
+    draw.line(screen, (255, 0, 0), s1, s2)
+    draw.line(screen, (0, 255, 0), m1, m2)
+    draw.line(screen, (0, 0, 255), h1, h2)
 
 screen = display.set_mode((1024,600))
 screen.fill((0,0,0))
@@ -103,9 +106,10 @@ while running:
             running = False
 
     # run clock
-    h = datetime.time(datetime.now())
-    m = datetime.time(datetime.now())
-    s = datetime.time(datetime.now())
+    current = datetime.now()
+    h = current.hour
+    m = current.minute
+    s = current.second
     clock(h, m, s)
     
     display.flip()
