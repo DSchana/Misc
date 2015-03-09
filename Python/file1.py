@@ -1,5 +1,5 @@
 # file I/O file input output
-numFile = open("nums2.txt", "r")
+numFile = open("nums.txt", "r")
 text = numFile.read()  # reads whole file as one string
 print(text)
 print(repr(text))  # shows all characters incuding \n etc.
