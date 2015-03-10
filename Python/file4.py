@@ -8,5 +8,5 @@ if len(names)%2 != 0:
     names.append("Mr.McKenzie")
 shuffle(names)
 for i in range(0, len(names)-1, 2):
-    rpsFile.write("%s %s %s\n" % (names[i].split()[0], "Vs.", names[i+1].split()[0]))
+    rpsFile.write("%-20s Vs. %-20s\n" % (names[i].split()[0], names[i+1].split()[0]))
 rpsFile.close()
