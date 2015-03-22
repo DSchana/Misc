@@ -46,8 +46,8 @@ int main(int argc, char const *argv[]) {
 		}
 
 		cvInRangeS(p_imgOriginal,
-			CV_RGB(175, 0, 0),  // min filter value
-			CV_RGB(256, 100, 100),  // max filter value
+			CV_RGB(0, 0, 0),  // min filter value
+			CV_RGB(30, 30, 30),  // max filter value
 			p_imgProcessed);
 
 		p_strStorage = cvCreateMemStorage(0); // allocate necessary memory
