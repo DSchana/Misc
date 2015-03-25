@@ -1,20 +1,25 @@
-words = open("File Exercise Data/story.txt", "r").read().strip().split()
-unique = []
-count = []
+def clean(line):
+	for p in ':;.,\"?!':
+		line = line.replace(p, "")
+	return line
 
-for word in words:
-	if word not in unique:
-		unique.append(word)
+story = open("File Exercise Data/story.txt", "r").read().strip().lower()
+story = clean(story).split()
 
-freq = open("File Exercise Data/frequency.txt", "w")
+freq = []
+words = []
 
-for i in range(len(unique)):
-	count.append(words.count(word))
-	unique[i][1] = str(count[i])
+for word in story:
+	word = word.strip("'")
+	if word not in words:
+		words.append(word)
+		freq.append((story.count(word), word))
 
-unique.sort()
+freq.sort(reverse = True)
 
-for i in range(len(unique)):
-	print(unique[i][0], unique[i][1])
+outFile = open("File Exercise Data/frequency.txt", "w")
 
-freq.close()
+for fr,wrd in freq:
+	outFile.write("%-20s%3d\n" % (wrd, fr))
+
+outFile.close()
