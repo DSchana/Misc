@@ -7,18 +7,33 @@ def clean(line):
 
 countries = []
 capitals = []
+rights = 0
 
-file = open("File assignment data/capitals.txt", "r").read().strip()
-file = clean(file).split("\n")
+file = open("File assignment data/capitals.txt", "r").read().strip().split("\n")
 
 for i in file:
-	countries.append(i[:i.index(" ")])
-	capitals.append(i[i.index(" ")+1:])
+	countries.append(i[:i.index("-")-1])
+	capitals.append(i[i.index("-")+2:])
 
 for i in range(10):
 	correct = randint(1, len(countries))
 	c_cont = countries[correct]
 	c_cap = capitals[correct]
-	wrongs = []
+	answers = []
 	for i in range(3):
-		wrongs.append(capitals[randint(1, len(countries))])
+		answers.append(capitals[randint(1, len(countries))])
+	answers.append(c_cap)
+	shuffle(answers)
+
+	print("What is the capital of", c_cont+"?")
+	for i in range(4):
+		print("%d. %-10s" % (i+1, answers[i]))
+
+	userIn = input()
+	if userIn == c_cap:
+		print("Correct")
+		rights += 1
+	else:
+		print("Wrong, the answer is", c_cap)
+
+print(str(rights*10) + "%")
