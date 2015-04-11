@@ -1,16 +1,22 @@
+# Dilpreet Chana
+# fileAssign2.py
+# Program quizzes user on the capital of 196 countries
+
 from random import *
 
 def clean(line):
+	"Removes any unwanted punctuation"
 	for p in ':;.,\"?!()[]-_':
 		line = line.replace(p, "")
 	return line
 
-countries = []
-capitals = []
+countries = []  # Holds all the countries
+capitals = []  # Holds all the capitals
 rights = 0
 
 file = open("File assignment data/capitals.txt", "r").read().strip().split("\n")
 
+# for loop separates capitals from countries
 for i in file:
 	countries.append(i[:i.index("-")-1])
 	capitals.append(i[i.index("-")+2:])

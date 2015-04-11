@@ -1,105 +1,71 @@
-// ObjectTracker v2
+#include <opencv/cv.h>
+#include <opencv/highgui.h>
+#include <iostream>
 
-#include<opencv\cvaux.h>
-#include<opencv\highgui.h>
-#include<opencv\cxcore.h>
+using namespace cv;
+using namespace std;
 
-#include<stdio.h>
-#include<stdlib.h>
+// Global variables
+Mat source, gray;
+Mat dst, cdst, ldst, detected_edges;
+vector<Vec4i> lines;
 
-int main(int argc, char const *argv[]) {
-	CvSize size640x480 = cvSize(640, 480);  // 640 x 480 used for all windows
+VideoCapture cap;
 
-	CvCapture* p_capWebCam;  // video assigned later
+int edgeThresh;
+int const lowThreshold = 5;
+int const maxThreshold = 200;
 
-	IplImage* p_imgOriginal;  // original image from cam
-	IplImage* p_imgProcessed;  // image after processing
+int ratio = 3;
+int kernel_size = 3;
 
-	CvMemStorage* p_strStorage;  // necessary storage variable
+char* window_name1 = "Edge Map";
+char* window_name2 = "Line Map";
 
-	CvSeq* p_seqCircles;  // pointer to Opencv sequence, will contain circles
+int main() {
+	cap.set(CV_CAP_PROP_FRAME_WIDTH, 640);
+	cap.set(CV_CAP_PROP_FRAME_HEIGHT, 480);
+	cap.open(0);
 
-	float* p_fltXYRadius;  // pointer to a 3 element array
-						   // [0] is X
-						   // [1] is Y
-						   // [2] is radius
-	p_capWebCam = cvCaptureFromCAM(0);  // get vidoe feed from web cam
-
-	if (p_capWebCam == NULL) {
-		printf("error: capture is NULL \n");
-		getchar();
-			return(-1);
-	}
-
-	// Declare windows
-	cvNamedWindow("Original", CV_WINDOW_AUTOSIZE);  // create original window
-	cvNamedWindow("Processed", CV_WINDOW_AUTOSIZE);  // create processed window
-
-	p_imgProcessed = cvCreateImage(size640x480, IPL_DEPTH_8U, 1);  // size, 8 bit colour depth, 1 channel (grayscale, 3 is colour image)
+	namedWindow("Camera Window", 1);
 
 	while (true) {
-		p_imgOriginal = cvQueryFrame(p_capWebCam);  // get frame from web cam capture object
-		if (p_imgOriginal == NULL) { // if frame did not capture
-			printf("error: frame is NULL \n");
-			getchar();
-			break;
+		try
+		{
+			cap >> source;  // try to capture image from camera
+		}
+		catch (Exception& e)  // Image not found, do this
+		{
+			const char* err_msg = e.what();  // get error
+			std::cout << "exception caught: imshow:\n" << err_msg << std::endl;  // display error
 		}
 
-		cvInRangeS(p_imgOriginal,
-			CV_RGB(0, 0, 0),  // min filter value
-			CV_RGB(30, 30, 30),  // max filter value
-			p_imgProcessed);
+		// Convert image to gray
+		cv::cvtColor(source, gray, CV_BRG2GRAY);
 
-		p_strStorage = cvCreateMemStorage(0); // allocate necessary memory
+		// reduce noise
+		blur(gray, detected_edges, cv::Size(3x3));
 
-					// in		// out			// filter
-		//cvSmooth(p_imgProcessed, p_imgProcessed, CV_GAUSSIAN, 9, 9);   // smooth the processed image
+		// Canny detector
+		Canny(detected_edges, detected_edges, lowThreshold, maxThreshold, kernel_size);
 
-		p_seqCircles = cvHoughCircles(p_imgProcessed, 
-									p_strStorage, 
-									CV_HOUGH_GRADIENT, 
-									2, 
-									p_imgProcessed->height / 4,
-									100,
-									50,
-									10,
-									400);  // fills sequential structure with circles.
-		for (int i = 0; i < p_seqCircles->total; i++) {  // loop through each detected circle
-			p_fltXYRadius = (float*)cvGetSeqElem(p_seqCircles, i);  // get i-th element in circles
-			printf("Ball position x = %f, y = %f r = %f \n", p_fltXYRadius[0],  // x coord
-															 p_fltXYRadius[1],  // y coord
-															 p_fltXYRadius[2]);  // radius
-			
-			// Draw green circle in center if object
-			cvCircle(p_imgOriginal,
-				cvPoint(cvRound(p_fltXYRadius[0]), cvRound(p_fltXYRadius[1])),
-				3,
-				CV_RGB(0, 255, 0),
-				CV_FILLED);
+		// use canny output as a mask
+		source.copyTo(dst, detected_edges);
+		cvtColor(dst, cdst, CV_BRG2GRAY);
+		HoughLines(cdst, lines, 25, CV_PI / 180, 1, 0, 0);
 
-			// Draw red circle around object
-			cvCircle(p_imgOriginal,
-				cvPoint(cvRound(p_fltXYRadius[0]), cvRound(p_fltXYRadius[1])),
-				cvRound(p_fltXYRadius[2]),  // radius of circle
-				CV_RGB(255, 0, 0),
-				3);  // 3 pixel thickness instead of filling
-		}  // end of for loop
-
-		cvShowImage("Original", p_imgOriginal);  // Orignal image with drawings
-		cvShowImage("Processed", p_imgProcessed);  // Processed image is shown
-
-		cvReleaseMemStorage(&p_strStorage);
-
-		if (cvWaitKey(30) == 27) {
-			break;
+		for (size_t i = 0; i < lines.size(); i++) {
+			int x1 = lines[i][0];
+			int x2 = lines[i][2];
+			int y1 = lines[i][1];
+			int y2 = lines[i][3];
+			line(cdst, Point(x1, y1), Point(x2, y2), Scalar(255, 255, 255), 1, 8);
 		}
 
-	}  // end of while
+		imshow("Source", source);
+		imshow("Detected lines", cdst);
 
-	cvReleaseCapture(&p_capWebCam);
-
-	cvDestroyWindow("Original");
-	cvDestroyWindow("Processed");
-
+		waitKey();
+	}
 	return 0;
 }
