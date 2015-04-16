@@ -16,5 +16,5 @@ print(tot)
 
 #readlines - reads whole file as a list of strings, one per line
 
-# lines = open("names.txt", "r").read().strip.split("\n")
+# lines = open("names.txt", "r").read().strip().split("\n")
 # better than readlines
