@@ -17,7 +17,7 @@ var server = net.createServer(function(c) {
 		console.log(str);
 	});
 	c.on("close", function() {
-		console.log("Nigga got shot");
+		console.log("Nigga got popped");
 	});
 	c.on("error", function(err) {
 		console.log(err);
