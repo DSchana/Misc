@@ -1,2 +1,2 @@
-# shits-and-giggles
-My shits and my giggles
+# Misc
+Some random stuff
