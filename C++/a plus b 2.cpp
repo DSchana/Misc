@@ -2,7 +2,7 @@
 
 using namespace std;
 
-string add (string &s1, string &s2) {
+string add(string &s1, string &s2) {
 	int carry=0, sum, i;
 
 	string  min=s1, max=s2, result = "";
@@ -40,6 +40,27 @@ string add (string &s1, string &s2) {
 	}
 
 	return result;
+}
+
+string difference(string &s1, string &s2) {
+	int borrow = 0, diff, i;
+
+	string min, max, result = "";
+
+	if (s1.length() > s2.length()) {
+		max = s1;
+		min = s2;
+	}
+	else {
+		max = s2;
+		min = s1;
+	}
+
+	for (i = min.length()-1; i >= 0; i--) {
+		if (max[i] - '0' >= min[i + min.length() - min.length()] - '0') {
+			diff = (max[i] - '0') - (min[i + min.length() - min.length()] - '0');
+		}
+	}
 }
 
 int main () {
