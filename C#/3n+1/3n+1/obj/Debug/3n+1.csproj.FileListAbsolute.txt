@@ -1,0 +1,6 @@
+C:\Users\dilpreet\Documents\GitHub\shits-and-giggles\C#\3n+1\3n+1\bin\Debug\3n+1.exe.config
+C:\Users\dilpreet\Documents\GitHub\shits-and-giggles\C#\3n+1\3n+1\bin\Debug\3n+1.exe
+C:\Users\dilpreet\Documents\GitHub\shits-and-giggles\C#\3n+1\3n+1\bin\Debug\3n+1.pdb
+C:\Users\dilpreet\Documents\GitHub\shits-and-giggles\C#\3n+1\3n+1\obj\Debug\3n+1.csprojResolveAssemblyReference.cache
+C:\Users\dilpreet\Documents\GitHub\shits-and-giggles\C#\3n+1\3n+1\obj\Debug\3n+1.exe
+C:\Users\dilpreet\Documents\GitHub\shits-and-giggles\C#\3n+1\3n+1\obj\Debug\3n+1.pdb

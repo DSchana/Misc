@@ -1,0 +1,108 @@
+
+
+
+
+
+/* javascript component called 13-DEC-2005 10:03:56 with id stud_ap */
+
+
+
+// ensures same ad can't display in two slots of the same size
+function removeFromAdList(alist, html) {
+	var tmp = new Array();
+	var j = 0;
+	for (var i = 0; i < alist.length; i++) {
+		if (alist[i] != html) { tmp[j] = alist[i] ; j++ }
+	}
+	return tmp;
+}
+
+// gets a random member of the array for that slot
+function getAds(pos) {
+	if (eval('window.' + pos)) {
+		var adLength = eval(pos + '.length');
+		var rndNum = Math.floor(Math.random() * adLength);
+		var html = eval(pos + '[rndNum]');
+		if (adLength > 0) {
+			if (pos == 'top' || pos == 'bottom') {
+				document.write(html);
+				if (window.bottom) {
+					bottom = removeFromAdList(bottom, html);
+				} else if (window.bottom_left) {
+					bottom_left = removeFromAdList(bottom_left, html);
+					bottom_right = removeFromAdList(bottom_right, html);
+				}
+			} else if (pos == 'bottom_left') {
+				document.write(html);
+				bottom_right = removeFromAdList(bottom_right, html);
+			} else {
+				document.write(html);
+			}
+		}
+	}
+}
+
+function getDoubleAds(pos) {
+
+	ad_ar = eval('window.' + pos);
+
+	if (ad_ar && ad_ar.length > 0) {
+		document.write('<div id="ads">');
+	
+		var rndNum = Math.floor(Math.random() * ad_ar.length);
+	
+		document.write(ad_ar[rndNum]);
+		ad_ar = removeFromAdList(ad_ar, ad_ar[rndNum]);
+
+		// is there anything left in the array
+		if (ad_ar.length > 0) {
+			rndNum = Math.floor(Math.random() * ad_ar.length);
+			document.write(ad_ar[rndNum]);
+		}
+		document.write('</div>');
+	}
+}
+
+
+
+
+
+// gets a random member of the array (with getAds) and displays within HTML
+function getAdsHTML(pos) {
+	// prevent from breaking if not called correctly
+	// calling with 'bottom' might mean one bottom array or two arrays for bottom_left and bottom_right
+	if (pos == 'bottom') {
+		if (!window.bottom && !window.bottom_left) { return }
+	} else {
+		if (!eval('window.' + pos)) { return }
+	}
+	
+	if (pos == 'left') {
+		getAds(pos);
+	}
+	else if (pos == 'bottom') {
+		document.write('' +
+			'<table cellpadding="0" cellspacing="0" border="0">' +
+			'<tr><td><img src="/images/null_1x1.gif" width="16" height="1" border="0" alt=""></td>' +
+			'<td>' ); 
+		if (window.bottom) { getAds('bottom'); } else { getAds('bottom_left'); }
+		document.write( '</td>' +
+			'<td><img src="/images/null_1x1.gif" width="4" height="1" border="0" alt=""></td>' +
+			'<td>' );
+		if (window.bottom) { getAds('bottom'); } else { getAds('bottom_right'); }
+		document.write( '</td></tr></table>' );
+	}
+	else {
+		getAds(pos);
+	}
+}
+
+var top = new Array();
+top[0]  = '<a href="http://apps.collegeboard.com/ut/AffiliateJumpPage.jsp?DestURL=http%3A%2F%2Fwww%2Ecollegeboard%2Ecom%2Fap%2Fcreditpolicy%2F&AffiliateID=1&BannerID=ba_34203"><img src="/images/ads/ba_34203.gif" width="234" height="60" alt="AP Policy Search Tool" border="0"></a>';
+var left = new Array();
+left[0]  = '<a href="http://apps.collegeboard.com/ut/AffiliateJumpPage.jsp?DestURL=http%3A%2F%2Fapps%2Ecollegeboard%2Ecom%2Fsearch%2Findex%2Ejsp&AffiliateID=1&BannerID=ba_47513"><img src="/images/ads/ba_47513.gif" width="182" height="70" alt="College Search - Find Colleges and Universities" border="0"></a>';
+left[1]  = '<a href="http://apps.collegeboard.com/ut/AffiliateJumpPage.jsp?DestURL=http%3A%2F%2Fwww%2Ecollegeboard%2Ecom%2Fap%2Fcreditpolicy%2F&AffiliateID=1&BannerID=ba_44332"><img src="/images/ads/ba_44332.gif" width="182" height="70" alt="AP Policy Search Tool" border="0"></a>';
+var bottom_left = new Array();
+bottom_left[0]  = '<a href="http://apps.collegeboard.com/ut/AffiliateJumpPage.jsp?DestURL=http%3A%2F%2Fwww%2Ecollegeboard%2Ecom%2Farticle%2F0%2C%2C5%2D25%2D0%2D27012%2C00%2Ehtml&AffiliateID=1&BannerID=ba_26126"><img src="/images/ads/ba_26126.gif" width="234" height="60" alt="Apply Online to College" border="0"></a>';
+var bottom_right = new Array();
+bottom_right[0]  = '<a href="http://apps.collegeboard.com/ut/AffiliateJumpPage.jsp?DestURL=http%3A%2F%2Fwww%2Ecollegeboard%2Ecom%2Fhtml%2Fnewsletters%2Fnewsletters%2Ehtml&AffiliateID=1&BannerID=ba_26080"><img src="/images/ads/ba_26080.gif" width="234" height="60" alt="Stay on Top of Important Dates and Deadlines" border="0"></a>';

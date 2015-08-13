@@ -1,35 +1,30 @@
 # main.py
+
 from pygame import *
 from random import *
 from Object import *
+from Cube import *
+import os
 
+os.environ['SDL_VIDEO_WINDOW_POS'] = '100,50'
 screen = display.set_mode((1000, 900))
 
 display.set_caption("3D")
-screen.fill((0, 0, 0))
 
 clock = time.Clock()
-cube = Object(300, 200, 200, 100)
+cube = Cube(500, 50, 2000, 50)
 
 running = True
 while running:
+	screen.fill((0, 0, 0))
 	for e in event.get():
 		if e.type == QUIT:
 			running = False
 
-	screen.fill((0, 0, 0))
-
 	pressed = key.get_pressed()
-	if pressed[K_UP]:
-		cube.moveObject("forward")
-	if pressed[K_DOWN]:
-		cube.moveObject("backward")
-	if pressed[K_RIGHT]:
-		cube.moveObject("right")
-	if pressed[K_LEFT]:
-		cube.moveObject("left")
 
-	cube.displayObject(screen)
+	cube.updateVar(pressed)
+	cube.render(screen)
 
 	display.flip()
 
