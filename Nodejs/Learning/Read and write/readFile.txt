@@ -1,0 +1,3 @@
+Hello this is read by a javascript program
+and outputed by it as well.
+This is a test.
