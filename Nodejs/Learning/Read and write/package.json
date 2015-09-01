@@ -1,0 +1,14 @@
+{
+  "name": "chatcat",
+  "version": "1.0.0",
+  "description": "Real time chat application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Dilpreet Chana",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.2.0"
+  }
+}

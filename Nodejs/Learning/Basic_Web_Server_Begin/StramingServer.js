@@ -5,6 +5,7 @@
 	port = '9000';
 
 var mimes = {
+	".html" : "text/html",
 	".htm" : "text/html",
 	".css" : "text/css",
 	".js" : "text/javascript",
