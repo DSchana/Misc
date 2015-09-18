@@ -1,27 +1,22 @@
-// 3n+1.cpp
+// warmup1.cpp
 
 #include <iostream>
+#include <limits>
 
 using namespace std;
 
 int main() {
-	long int n;
-	int count = 0;
+	int a, min_p = numeric_limits<int>::max();
 
-	cin >> n;
+	cin >> a;
 
-	while (n != 1) {
-		if (n % 2 == 0) {
-			n /= 2;
+	for (int i = 0; i<a / 2; i++) {
+		if (a % i == 0 && (2 * i) + (2 * (a / i)) < min_p) {
+			min_p = (2 * i) + (2 * (a / i));
 		}
-		else {
-			n = 3 * n + 2;
-		}
-
-		count++;
 	}
 
-	cout << count;
+	cout << min_p << endl;
 
 	return 0;
 }

@@ -5,7 +5,7 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsGame1", "WindowsGame1\WindowsGame1\WindowsGame1.csproj", "{91F03424-C11E-4DDC-9A49-5A6833AEFC28}"
 EndProject
-Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "WindowsGame1Content", "WindowsGame1\WindowsGame1Content\WindowsGame1Content.contentproj", "{FBD75813-56F2-490E-B95B-CD3338124D83}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsGame1Content", "WindowsGame1\WindowsGame1Content\WindowsGame1Content.contentproj", "{FBD75813-56F2-490E-B95B-CD3338124D83}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
