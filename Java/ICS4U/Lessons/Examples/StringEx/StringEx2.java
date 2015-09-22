@@ -18,8 +18,11 @@ public class StringEx2 {
 			end += sent.substring(sent.length()-1, sent.length());
 		}
 
-		System.out.println(half1);
-		System.out.println(half2);
-		System.out.println(end);
+		for (int i=0; i<half1.length(); i++) {
+			System.out.print(half1.charAt(i));
+			System.out.print(half2.charAt(i));
+		}
+		System.out.print(end);
+		System.out.println();
 	}
 }
