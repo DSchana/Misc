@@ -1,4 +1,7 @@
+// Dilpreet Chana
 // BasicAssign3.java
+// Write a program that allows the user to enter the co-ordinates of a point (x,y) and a line
+// (x1, y1, x2, y2) and tells them is the point is on the line or not.
 
 import java.util.*;
 import java.awt.geom.*;

@@ -1,10 +1,14 @@
+// Dilpreet Chana
 // BasicAssign5.java
+// Write a program that reads in a product code and outputs
+// whether it is valid or not based on some simple rules.
 
 import java.util.*;
 
 public class BasicAssign5 {
 	public static void main(String[] args) {
 		Scanner kb = new Scanner(System.in);
+		boolean allUpper = true;
 		String code = kb.nextLine();
 		String[] parts = code.split(" ");
 		String check = new String(parts[0]);
@@ -18,6 +22,8 @@ public class BasicAssign5 {
 				else if (num_1 == -1) {
 					num_1 = Character.getNumericValue(check.charAt(i));
 				} 
+			} else if (!Character.isUpperCase(check.charAt(i))) {
+				allUpper = false;
 			}
 			if (num_10 != -1 && num_1 != -1) {
 				tot *= (num_10 + num_1);
@@ -25,10 +31,7 @@ public class BasicAssign5 {
 				num_10 = -1;
 			}
 		}
-		if (tot == security) {
-			System.out.println("Is valid");
-		} else {
-			System.out.println("Is not valid");
-		}
+		
+		System.out.println(tot==security && allUpper ? "Is valid" : "Is not valid");
 	}
 }

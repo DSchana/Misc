@@ -1,4 +1,6 @@
+// Dilpreet Chana
 // BasicAssign2.java
+// Get a line of text from the user and replace each sequences of blanks in the string with a single blank.
 
 import java.util.*;
 
