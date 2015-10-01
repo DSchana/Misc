@@ -15,9 +15,10 @@ public class BasicAssign3 {
 				y1 = kb.nextDouble(),
 				x2 = kb.nextDouble(),
 				y2 = kb.nextDouble();
-		 Point2D.Double point = new Point2D.Double(x, y);
-		 Line2D.Double line = new Line2D.Double(x1, y1, x2, y2);
+		 Point2D.Double point = new Point2D.Double(x, y);  // Create point object
+		 Line2D.Double line = new Line2D.Double(x1, y1, x2, y2);  // Create line object
 
+		 // Check if the line intersects line
 		 if (line.ptLineDist(point) == 0.0) {
 		 	System.out.println("Does intersect");
 		 } else {

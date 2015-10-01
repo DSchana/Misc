@@ -8,15 +8,19 @@ import java.util.*;
 public class BasicAssign4 {
 	public static void main(String[] args) {
 		Random rand = new Random();
-		int[] births = new int[365];
+		int[] births = new int[365];  // List of all possible birthdays (0-365 days)
 		int tot=0;
 		
+		// Run experiment 10000 times
 		for (int i=0; i<10000; i++) {
-			Arrays.fill(births, -1);
+			Arrays.fill(births, -1);  // Reset list of births for next execution of experiment
 			
-			for (int j=1; j<365; j++) {
+			// Run experiment until match is found. After 365 runs, a match has to have occurred
+			for (int j=0; j<=365; j++) {
 				tot++;
-				int day = rand.nextInt(365);
+				int day = rand.nextInt(365);  // Generate random birthday
+
+				// check if anyone else has this birthday already. If so, break
 				if (births[day] == day) {
 					break;
 				} else {
@@ -24,6 +28,6 @@ public class BasicAssign4 {
 				}
 			}
 		}
-		System.out.println(tot/10000);
+		System.out.println(tot/10000);  // Print the average
 	}
 }
