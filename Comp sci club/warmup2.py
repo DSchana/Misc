@@ -1,5 +1,5 @@
 # warmup2.py
-
+#cookies are coolios
 def fillX(i, j):
 	if tomb[i][j] == ".":
 		tomb[i][j] = "X"
