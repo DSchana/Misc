@@ -11,6 +11,8 @@ public class Basic1 {
 		double money = 50.25;
 		char grade = 'A';
 		String name = "Aaron";
+		
+		System.out.println(x);
 
 		/*
 		int, double and char are primative types
