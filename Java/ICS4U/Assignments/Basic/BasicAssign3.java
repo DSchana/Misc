@@ -19,7 +19,8 @@ public class BasicAssign3 {
 		 Line2D.Double line = new Line2D.Double(x1, y1, x2, y2);  // Create line object
 
 		 // Check if the line intersects line
-		 if (line.ptLineDist(point) == 0.0) {
+		 // <= 0.000001 is to accomadate for double rounding error
+		 if (Math.abs(line.ptLineDist(point)) <= 0.000001) {
 		 	System.out.println("Does intersect");
 		 } else {
 		 	System.out.println("Does not intersect");

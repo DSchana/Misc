@@ -12,9 +12,7 @@ public class BasicAssign2 {
 
 		for (String word : words) {
 			// Check if the list position is empty. If it is, the position in the original string contained a space
-			if (word.equals("")) {
-				// do nothing
-			} else {
+			if (!word.equals("")) {
 				System.out.print(word + " ");  // print space only if a word is found, therefore for every word there is one space
 			}
 		}
