@@ -3,7 +3,7 @@
 n = int(input())
 heights = []
 ugly = 0
-
+#hello
 for i in range(n):
     heights.append(int(input()))
 
