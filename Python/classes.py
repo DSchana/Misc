@@ -3,7 +3,7 @@
 class Bird:
     def __init__(self, kind, call, maj):  # initialize class with bird type and bird call sound
         self.call = call  # create variable in this instance of bird to hold the call and kind variable info
-        self.kind = kind
+        self.kind = kind#muchcreative
         self.maj = maj
     def doCall(self):  # self is used to do this method to the current instance of bird
         print("a %s goes %s" %(self.kind, self.call))
