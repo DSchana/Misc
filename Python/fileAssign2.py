@@ -3,7 +3,7 @@
 # Program quizzes user on the capital of 196 countries
 
 from random import *
-
+#brownboy
 def clean(line):
 	"Removes any unwanted punctuation"
 	for p in ':;.,\"?!()[]-_':
