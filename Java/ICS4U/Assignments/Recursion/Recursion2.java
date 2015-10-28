@@ -1,5 +1,6 @@
 // Dilpreet Chana
 // Recursion2.java
+// Find the most ime efficient path given a grid of times
 
 import java.util.*;
 
@@ -10,7 +11,7 @@ public class Recursion2 {
 	public static void main(String[] args) {
 		Scanner kb = new Scanner(System.in);
 		int[][] grid = new int[8][8];
-		/*
+		/*  test grid
 		int[][] grid = {
 			{ 0, 12, 7, 43, 32, 12, 30, 15 },
 			{ 21, 26, 18, 34, 41, 9, 17, 21 },
@@ -39,9 +40,9 @@ public class Recursion2 {
 	}
 
 	public static void findPath(int[][] grid, String path, int x, int y, int time) {
-		if (x == 7 || y == 8) {
-			if (time < best_time && path.length() >= 14) {
-				best_time = time;
+		if (x == 7 || y == 8) {  // check if either x or y reach the end of the grid
+			if (time + grid[7][7] < best_time && path.length() >= 14) {  // Ensure the path is able to reach the end
+				best_time = time + grid[7][7];  // Add last time value to best_time
 				best_path = path;
 			}
 		}
