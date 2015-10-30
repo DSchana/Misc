@@ -1,5 +1,5 @@
 # warmup1.py
-
+#cookies are awesomee
 a = int(input())
 
 min_p = 10000000
