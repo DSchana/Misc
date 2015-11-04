@@ -3,7 +3,7 @@ word2 = list(input().lower()).sort()
 
 for i in range(len(word1)-1,-1,-1):
     if word1[i] == " ":
-        del word1[i]
+        del word1[i]#goodjob
 
 for i in range(len(word2)-1,-1,-1):
     if word2[i] == " ":
