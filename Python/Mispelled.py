@@ -8,5 +8,5 @@ for i in range(N):
 	words.append(userIn[userIn.index(" "):])
 
 for i in range(N):
-	del(words[i][nums[i]])
+	del(words[i][nums[i]]) #IforgethowtodothisbutYOLO
 	print(i+1, words[i])
