@@ -2,10 +2,13 @@
 
 #include <iostream>
 #include <limits>
+#include <string>
 
 using namespace std;
 
 int main() {
+	string num_s;
+	int num = stoi(num_s);
 	int a, min_p = numeric_limits<int>::max();
 
 	cin >> a;

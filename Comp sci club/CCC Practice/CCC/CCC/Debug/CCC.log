@@ -1,0 +1,4 @@
+﻿  CCC96S1.cpp
+c:\users\dilpreet\documents\github\shits-and-giggles\comp sci club\ccc\ccc96s1.cpp(11): error C2057: expected constant expression
+c:\users\dilpreet\documents\github\shits-and-giggles\comp sci club\ccc\ccc96s1.cpp(11): error C2466: cannot allocate an array of constant size 0
+c:\users\dilpreet\documents\github\shits-and-giggles\comp sci club\ccc\ccc96s1.cpp(11): error C2133: 'nums' : unknown size

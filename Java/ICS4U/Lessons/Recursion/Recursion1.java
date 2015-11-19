@@ -20,7 +20,7 @@ public class Recursion1 {
 			System.out.println(soFar);
 		else {
 			bits(n-1, soFar + "0");
-			bits(n-1, soFar + "0");
+			bits(n-1, soFar + "1");
 		}
 	}
 }

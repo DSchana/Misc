@@ -1,0 +1,107 @@
+// CheckersBoard.java
+
+import java.util.*;
+
+public class CheckersBoard {
+	private int[][] board = {
+		{ 2, 0, 2, 0, 2, 0, 2, 0 },
+		{ 0, 2, 0, 2, 0, 2, 0, 2 },
+		{ 2, 0, 2, 0, 2, 0, 2, 0 },
+		{ 0, 0, 0, 0, 0, 0, 0, 0 },
+		{ 0, 0, 0, 0, 0, 0, 0, 0 },
+		{ 0, 1, 0, 1, 0, 1, 0, 1 },
+		{ 1, 0, 1, 0, 1, 0, 1, 0 },
+		{ 0, 1, 0, 1, 0, 1, 0, 1 }
+	};
+
+	public static final int BLACK = 1;
+	public static final int RED = 2;
+
+	private int turn = BLACK;
+
+	private ArrayList<Integer> takeX = new ArrayList<Integer>();
+	private ArrayList<Integer> takeY = new ArrayList<Integer>();
+
+	public boolean Move(int x1, int y1, int x2, int y2) {
+		if (x1 >= 0 && x1 <= 7 && y1 >= 0 && y1 <= 7){
+			if (x1 == x2 && y1 == y2) {
+				if (turn == RED)
+					board[y2][x2] = RED;
+				else
+					board[y2][x2] = BLACK;
+				for (int i = 0; i < takeX.size(); i++) {
+					board[takeY.get(i)][takeX.get(i)] = 0;
+				}
+
+				return true;
+			}
+			else {
+				if (x1 - 1 >= 0 && board[y1-1][x1-1] == 0) {
+					Move(x1 - 1, y1 - 1, x2, y2);
+				}
+				if (x1 + 1 <= 7 && board[y1-1][x1+1] == 0) {
+					Move(x1 + 1, y1 - 1, x2, y2);
+				}
+				if (x1 - 1 >= 0 && board[y1-1][x1-1] == BLACK && turn == RED ||
+					x1 - 1 >= 0 && board[y1-1][x1-1] == RED && turn == BLACK) {
+					if (x1 - 2 >= 0 && board[y1-2][x1-2] == 0) {
+						takeX.add(x1 - 1);
+						takeY.add(y1 - 1);
+						Move(x1 - 2, y1 - 2, x2, y2);
+					}
+				}
+				if (x1 + 1 <= 7 && board[y1-1][x1+1] == BLACK && turn == RED ||
+					x1 + 1 <= 7 && board[y1-1][x1+1] == RED && turn == BLACK) {
+					if (x1 + 2 <= 7 && board[y1-2][x1+2] == 0) {
+						takeX.add(x1 + 1);
+						takeY.add(y1 - 1);
+						Move(x1 + 2, y1 - 2, x2, y2);
+					}
+				}
+			}
+
+			if (turn == RED)
+				turn = BLACK;
+			else
+				turn = RED;
+		}
+		return false;
+	}
+
+	public int Count(int colour) {
+		int count = 0;
+
+		if (colour == RED) {
+			for (int i = 0; i < 8; i++) {
+				for (int j = 0; j < 8; j++) {
+					if (board[j][i] == 2)
+						count++;
+				}
+			}
+		}
+		else if (colour == BLACK) {
+			for (int i = 0; i < 8; i++) {
+				for (int j = 0; j < 8; j++) {
+					if (board[j][i] == 1)
+						count++;
+				}
+			}
+		}
+
+		return count;
+	}
+
+	public void Display() {
+		System.out.println("_________________");
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+				if (board[i][j] != 0)
+					System.out.printf("|%d", board[i][j]);
+				else
+					System.out.print("| ");
+			}
+			System.out.print("|\n");
+			System.out.print("|_|_|_|_|_|_|_|_|\n");
+		}
+	}
+}
