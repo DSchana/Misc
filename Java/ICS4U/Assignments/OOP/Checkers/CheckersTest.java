@@ -7,7 +7,8 @@ public class CheckersTest {
 		CheckersBoard board = new CheckersBoard();
 		board.Display();
 		System.out.println(board.Count(board.RED));
-		System.out.println(board.Move(7, 5, 6, 4));
+		System.out.println(board.Move(7, 5, 5, 3));
+		// System.out.println(board.Move(7, 5, 3, 1);  Case does not work yet
 		board.Display();
 	}
 }

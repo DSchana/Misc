@@ -5,15 +5,16 @@ import java.util.*;
 public class CheckersBoard {
 	private int[][] board = {
 		{ 2, 0, 2, 0, 2, 0, 2, 0 },
-		{ 0, 2, 0, 2, 0, 2, 0, 2 },
+		{ 0, 2, 0, 0, 0, 2, 0, 2 },
 		{ 2, 0, 2, 0, 2, 0, 2, 0 },
 		{ 0, 0, 0, 0, 0, 0, 0, 0 },
-		{ 0, 0, 0, 0, 0, 0, 0, 0 },
+		{ 0, 0, 0, 0, 0, 0, 2, 0 },
 		{ 0, 1, 0, 1, 0, 1, 0, 1 },
 		{ 1, 0, 1, 0, 1, 0, 1, 0 },
 		{ 0, 1, 0, 1, 0, 1, 0, 1 }
 	};
 
+	public static final int EMPTY = 0;
 	public static final int BLACK = 1;
 	public static final int RED = 2;
 
@@ -23,49 +24,44 @@ public class CheckersBoard {
 	private ArrayList<Integer> takeY = new ArrayList<Integer>();
 
 	public boolean Move(int x1, int y1, int x2, int y2) {
-		if (x1 >= 0 && x1 <= 7 && y1 >= 0 && y1 <= 7){
+		if (x1 >= 0 && x1 <= 7 && y1 >= 0 && y1 <= 7 && board[y2][x1] == EMPTY) {  // Keep cases on the board and target position is empty
 			if (x1 == x2 && y1 == y2) {
-				if (turn == RED)
-					board[y2][x2] = RED;
-				else
-					board[y2][x2] = BLACK;
-				for (int i = 0; i < takeX.size(); i++) {
-					board[takeY.get(i)][takeX.get(i)] = 0;
-				}
-
+				board[y1][x1] = turn;
+				turn = 3 % (turn + 1) + 1;  // Change turn
 				return true;
 			}
-			else {
-				if (x1 - 1 >= 0 && board[y1-1][x1-1] == 0) {
-					Move(x1 - 1, y1 - 1, x2, y2);
-				}
-				if (x1 + 1 <= 7 && board[y1-1][x1+1] == 0) {
-					Move(x1 + 1, y1 - 1, x2, y2);
-				}
-				if (x1 - 1 >= 0 && board[y1-1][x1-1] == BLACK && turn == RED ||
-					x1 - 1 >= 0 && board[y1-1][x1-1] == RED && turn == BLACK) {
-					if (x1 - 2 >= 0 && board[y1-2][x1-2] == 0) {
-						takeX.add(x1 - 1);
-						takeY.add(y1 - 1);
-						Move(x1 - 2, y1 - 2, x2, y2);
-					}
-				}
-				if (x1 + 1 <= 7 && board[y1-1][x1+1] == BLACK && turn == RED ||
-					x1 + 1 <= 7 && board[y1-1][x1+1] == RED && turn == BLACK) {
-					if (x1 + 2 <= 7 && board[y1-2][x1+2] == 0) {
-						takeX.add(x1 + 1);
-						takeY.add(y1 - 1);
-						Move(x1 + 2, y1 - 2, x2, y2);
-					}
-				}
+
+			if (Move(x1-1, y1+(turn - (3%(turn+1)+1)), x2, y2)) {
+				board[y1][x1] = EMPTY;
+				return true;
 			}
 
-			if (turn == RED)
-				turn = BLACK;
-			else
-				turn = RED;
+			if (Move(x1+1, y1+(turn - (3%(turn+1)+1)), x2, y2)) {
+				board[y1][x1] = EMPTY;
+				return true;
+			}
+
+			if (board[y1+(turn-(3%(turn+1)+1))][x1-1] == 3 % (turn + 1) + 1) {  // check if opponent peice is in the way
+				if (Move(x1-2, y1+(turn-(3%(turn+1)+1))*2, x2, y2)) {
+					board[y1][x1] = EMPTY;
+					board[y1+(turn-(3%(turn+1)+1))][x1-1] = EMPTY;
+					return true;
+				}
+				else return false;
+			}
+
+			if (board[y1+(turn-(3%(turn+1)+1))][x1-1] == 3 % (turn + 1) + 1) {  // check if opponent peice is in the way
+				if (Move(x1-2, y1+(turn-(3%(turn+1)+1))*2, x2, y2)) {
+					board[y1][x1] = EMPTY;
+					board[y1+(turn-(3%(turn+1)+1))][x1-1] = EMPTY;
+					return true;
+				}
+				else return false;
+			} else return false;
 		}
-		return false;
+		else {
+			return false;
+		}
 	}
 
 	public int Count(int colour) {
