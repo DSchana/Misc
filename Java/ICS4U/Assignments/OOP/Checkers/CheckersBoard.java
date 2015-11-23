@@ -5,7 +5,7 @@ import java.util.*;
 public class CheckersBoard {
 	private int[][] board = {
 		{ 2, 0, 2, 0, 2, 0, 2, 0 },
-		{ 0, 2, 0, 0, 0, 2, 0, 2 },
+		{ 0, 2, 0, 2, 0, 2, 0, 0 },
 		{ 2, 0, 2, 0, 2, 0, 2, 0 },
 		{ 0, 0, 0, 0, 0, 0, 0, 0 },
 		{ 0, 0, 0, 0, 0, 0, 2, 0 },
@@ -19,30 +19,36 @@ public class CheckersBoard {
 	public static final int RED = 2;
 
 	private int turn = BLACK;
-
-	private ArrayList<Integer> takeX = new ArrayList<Integer>();
-	private ArrayList<Integer> takeY = new ArrayList<Integer>();
+	private boolean startSet = false;
+	private int startX, startY;
 
 	public boolean Move(int x1, int y1, int x2, int y2) {
-		if (x1 >= 0 && x1 <= 7 && y1 >= 0 && y1 <= 7 && board[y2][x1] == EMPTY) {  // Keep cases on the board and target position is empty
+		if (!startSet) {
+			startX = x1;
+			startY = y1;
+			startSet = true;
+		}
+
+		if (x1 >= 0 && x1 <= 7 && y1 >= 0 && y1 <= 7 && board[y2][x2] == EMPTY && board[startY][startX] == turn) {  // Keep cases on the board and target position is empty
 			if (x1 == x2 && y1 == y2) {
 				board[y1][x1] = turn;
+				startSet = false;
 				turn = 3 % (turn + 1) + 1;  // Change turn
 				return true;
 			}
 
-			if (Move(x1-1, y1+(turn - (3%(turn+1)+1)), x2, y2)) {
+			if (x1-1 >= 0 && y1+(turn - (3%(turn+1)+1)) >= 0 && y1+(turn - (3%(turn+1)+1)) <= 7 && Move(x1-1, y1+(turn - (3%(turn+1)+1)), x2, y2)) {
 				board[y1][x1] = EMPTY;
 				return true;
 			}
 
-			if (Move(x1+1, y1+(turn - (3%(turn+1)+1)), x2, y2)) {
+			if (x1+1 <= 7 && y1+(turn - (3%(turn+1)+1)) >= 0 && y1+(turn - (3%(turn+1)+1)) <= 7 && Move(x1+1, y1+(turn - (3%(turn+1)+1)), x2, y2)) {
 				board[y1][x1] = EMPTY;
 				return true;
 			}
 
-			if (board[y1+(turn-(3%(turn+1)+1))][x1-1] == 3 % (turn + 1) + 1) {  // check if opponent peice is in the way
-				if (Move(x1-2, y1+(turn-(3%(turn+1)+1))*2, x2, y2)) {
+			if (x1-1 >= 0 && y1+(turn - (3%(turn+1)+1)) >= 0 && y1+(turn - (3%(turn+1)+1)) <= 7 && board[y1+(turn-(3%(turn+1)+1))][x1-1] == 3 % (turn + 1) + 1) {  // check if opponent peice is in the way
+				if (x1-2 >= 0 && y1+(turn - (3%(turn+1)+1))*2 >= 0 && y1+(turn - (3%(turn+1)+1))*2 <= 7 && Move(x1-2, y1+(turn-(3%(turn+1)+1))*2, x2, y2)) {
 					board[y1][x1] = EMPTY;
 					board[y1+(turn-(3%(turn+1)+1))][x1-1] = EMPTY;
 					return true;
@@ -50,8 +56,8 @@ public class CheckersBoard {
 				else return false;
 			}
 
-			if (board[y1+(turn-(3%(turn+1)+1))][x1-1] == 3 % (turn + 1) + 1) {  // check if opponent peice is in the way
-				if (Move(x1-2, y1+(turn-(3%(turn+1)+1))*2, x2, y2)) {
+			if (x1+1 >= 0 && y1+(turn - (3%(turn+1)+1)) >= 0 && y1+(turn - (3%(turn+1)+1)) <= 7 && board[y1+(turn-(3%(turn+1)+1))][x1-1] == 3 % (turn + 1) + 1) {  // check if opponent peice is in the way
+				if (x1+2 >= 0 && y1+(turn - (3%(turn+1)+1))*2 >= 0 && y1+(turn - (3%(turn+1)+1))*2 <= 7 && Move(x1+2, y1+(turn-(3%(turn+1)+1))*2, x2, y2)) {
 					board[y1][x1] = EMPTY;
 					board[y1+(turn-(3%(turn+1)+1))][x1-1] = EMPTY;
 					return true;
