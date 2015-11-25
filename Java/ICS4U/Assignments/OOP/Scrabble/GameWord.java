@@ -1,9 +1,16 @@
 // GameWord.java
+// Dilpreet Chana
+// GameWord class represents words in the game scrabble.To be used with scrabble.
+// METHODS:
+// public String reverse() - return reverse contents
+// public boolean anagram(word) - return true if contents can be rearranged to form word
+// public int pointValue(x, y, direction) - returns the points contents are worth at that position
+// public ArrayList<String> permutations() - return list of different variations of contents
 
 import java.util.*;
 
 public class GameWord {
-	public String contents;
+	private String contents;
 
 	private int[][] grid = {
 		/*
@@ -20,7 +27,7 @@ public class GameWord {
 		{ 1, 1, 1, 1, 4, 1, 1, 1, 1, 1, 4, 1, 1, 1, 1 },
 		{ 1, 3, 1, 1, 1, 3, 1, 1, 1, 3, 1, 1, 1, 3, 1 },
 		{ 1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1, 1 },
-		{ 5, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 5 },
+		{ 5, 1, 1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1, 1, 5 },
 		{ 1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1, 1 },
 		{ 1, 3, 1, 1, 1, 3, 1, 1, 1, 3, 1, 1, 1, 3, 1 },
 		{ 1, 1, 1, 1, 4, 1, 1, 1, 1, 1, 4, 1, 1, 1, 1 },
@@ -30,29 +37,27 @@ public class GameWord {
 		{ 5, 1, 1, 2, 1, 1, 1, 5, 1, 1, 1, 2, 1, 1, 5 }
 	};
 
-	private char[][] points = {
-		{ '1', 'E', 'A', 'I', 'O', 'N', 'R', 'T', 'L', 'S', 'U' },
-		{ '2', 'D', 'G' },
-		{ '3', 'B', 'C', 'M', 'P' },
-		{ '4', 'F', 'H', 'V', 'W', 'Y' },
-		{ '5', 'K' },
-		{ '8', 'J', 'X' },
-		{ '0', 'Q', 'Z' }
-	};
+	private String[] points = { "1EAIONRTLSU", "2DG", "3BCMP", "4FHVWY", "5K", "8JK", "0QZ" };
 
-	private ArrayList<String> perms;
+	private ArrayList<String> perms;  // List of permutations
 
 	public static final int RIGHT = 1;
 	public static final int DOWN = 2;
 
+	public GameWord(String words) {
+		contents = words;
+	}
+
 	public String reverse() {
-		return new StringBuffer(this.contents).reverse().toString();
+		return new StringBuffer(contents).reverse().toString();  // Reverse the string using string buffer class
 	}
 
 	public boolean anagram(String word) {
+		// Make char string of words to check
 		String[] check = contents.split("");
 		String[] aWord = word.split("");
 		
+		// Order thhe arrays in the same way
 		Arrays.sort(check);
 		Arrays.sort(aWord);
 
@@ -64,48 +69,68 @@ public class GameWord {
 	}
 
 	public int pointValue(int x, int y, int direction) {
-		int point = 0;
-		int addPoints = 0;
-		int multiplier = 1;
-		char[] contentsArray = contents.toCharArray();
+		int point = 0, multiplier = 1;  // multiplier holds word multiplier
 
 		if (direction == RIGHT) {
-			for (int i = 0; i < contentsArray.length; i++) {
-				for (int j = 0; j < points.length; j++) {
-					if (Arrays.binarySearch(points[i], contentsArray[i]) != -1 && grid[y][x+i] <= 3) {
-						if (points[j][0] == 0) {
-							addPoints += 10 * grid[y][x+i];
+			// Checks if word has gone off board
+			if (x + contents.length() > 14) {
+				return 0;
+			}
+			for (int i = 0; i < contents.length(); i++) {  // run through every letter in contents
+				for (String check : points) {  // check each point group
+					if (check.indexOf(contents.charAt(i)) != -1) {  // Find point value for letter
+						// Add point value or increase word multiplier
+						if (grid[y][x+i] <= 3) {
+							if (Character.getNumericValue(check.charAt(0)) == 0) {
+								point += 10 * grid[y][x+i];
+							}
+							else {
+								point += Character.getNumericValue(check.charAt(0)) * grid[y][x+i];
+							}
 						}
 						else {
-							addPoints += Character.getNumericValue(points[j][0]) * grid[y][x+i];
+							multiplier *= grid[y][x+i] - 2;
+							if (Character.getNumericValue(check.charAt(0)) == 0) {
+								point += 10;
+							}
+							else {
+								point += Character.getNumericValue(check.charAt(0));
+							}
 						}
 					}
 				}
-				if (grid[y][x+i] > 3) {
-					multiplier *= grid[y][x+i] - 2;
-				}
 			}
 		}
+		// Same as above
 		if (direction == DOWN) {
-			for (int i = 0; i < contentsArray.length; i++) {
-				for (int j = 0; j < points.length; j++) {
-					if (Arrays.binarySearch(points[i], contentsArray[i]) != -1 && grid[y+i][x] <= 3) {
-						if (points[j][0] == 0) {
-							addPoints += 10 * grid[y+i][x];
+			if (y + contents.length() > 14) {
+				return 0;
+			}
+			for (int i = 0; i < contents.length(); i++) {
+				for (String check : points) {
+					if (check.indexOf(contents.charAt(i)) != -1) {
+						if (grid[y+i][x] <= 3) {
+							if (Character.getNumericValue(check.charAt(0)) == 0) {
+								point += 10 * grid[y+i][x];
+							}
+							else {
+								point += Character.getNumericValue(check.charAt(0)) * grid[y+i][x];
+							}
 						}
 						else {
-							addPoints += Character.getNumericValue(points[j][0]) * grid[y][x+i];
+							multiplier *= grid[y+i][x] - 2;
+							if (Character.getNumericValue(check.charAt(0)) == 0) {
+								point += 10;
+							}
+							else {
+								point += Character.getNumericValue(check.charAt(0));
+							}
 						}
 					}
 				}
-				if (grid[y+i][x] > 3) {
-					multiplier *= grid[y][x+i] - 2;
-				}
 			}
 		}
-		point += addPoints;
-		point *= multiplier;
-		return point;
+		return point * multiplier;
 	}
 
 	public ArrayList<String> permutations() {
@@ -120,7 +145,7 @@ public class GameWord {
 		}
 		else {
 			for (int i = 0; i < left.length(); i++) {
-				permutations(left.substring(0, i) + left.substring(i+1), soFar + left.charAt(i));
+				permutations(left.substring(0, i) + left.substring(i+1), soFar + left.charAt(i));  // Add to string until all letters have been added
 			}
 		}
 	}
