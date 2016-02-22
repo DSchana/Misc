@@ -14,6 +14,7 @@ public class LList {
 
 	public void enqueue(int n) {
 		LNode tmp = new LNode(null, n, tail);
+		tail.setNext(tmp);
 		tail = tmp;
 	}
 

@@ -20,6 +20,10 @@ public class LNode {
 	public int getVal() {
 		return  val;
 	}
+
+	public void setNext(LNode n) {
+		next = n;
+	}
 	
 	public String toString() {
 		return "<" + val + ">";
