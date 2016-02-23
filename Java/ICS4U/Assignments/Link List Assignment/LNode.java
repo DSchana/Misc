@@ -24,10 +24,13 @@ public class LNode {
 	public void setNext(LNode n) {
 		next = n;
 	}
+<<<<<<< HEAD
 
 	public void setPrev(LNode p) {
 		prev = p;
 	}
+=======
+>>>>>>> b9b8f6ae8d7ead2613e45b941ac14f40bfbaedf3
 	
 	public String toString() {
 		return "<" + val + ">";
