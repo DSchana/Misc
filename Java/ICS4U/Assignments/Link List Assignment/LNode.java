@@ -3,7 +3,7 @@ public class LNode {
 	private LNode next;
 	private LNode prev;
 	
-	public LNode(LNode n, int v, LNode p) {
+	public LNode(LNode p, int v, LNode n) {
 		val = v;
 		next = n;
 		prev = p;
@@ -19,6 +19,14 @@ public class LNode {
 
 	public int getVal() {
 		return  val;
+	}
+
+	public void setNext(LNode n) {
+		next = n;
+	}
+
+	public void setPrev(LNode p) {
+		prev = p;
 	}
 	
 	public String toString() {
