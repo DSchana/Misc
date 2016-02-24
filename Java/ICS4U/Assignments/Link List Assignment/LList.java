@@ -13,7 +13,6 @@ public class LList {
 	}
 
 	public void enqueue(int n) {
-<<<<<<< HEAD
 		LNode tmp = new LNode(tail, n, null);
 		if (tail != null) {
 			tail.setNext(tmp);
@@ -21,10 +20,6 @@ public class LList {
 		else {
 			head = tmp;
 		}
-=======
-		LNode tmp = new LNode(null, n, tail);
-		tail.setNext(tmp);
->>>>>>> b9b8f6ae8d7ead2613e45b941ac14f40bfbaedf3
 		tail = tmp;
 	}
 
@@ -47,15 +42,35 @@ public class LList {
 	}
 
 	public void delete(LNode n) {
-
+		n.getPrev().setNext(n.getNext());
+		n.getNext().setPrev(n.getPrev());
 	}
 
 	public void delete(int n) {
-
+		LNode tmp = head;
+		while (tmp != null) {
+			if (tmp.getVal() == n) {
+				tmp.getPrev().setNext(tmp.getNext());
+				tmp.getNext().setPrev(tmp.getPrev());
+				break;
+			}
+			tmp = tmp.getNext();
+		}
 	}
 
 	public void deleteAt(int n) {
-		
+		LNode tmp = head;
+		int c = 0;
+		while (tmp != null) {
+			System.out.println(c + " " + tmp.getVal());
+			if (c == n) {
+				tmp.getPrev().setNext(tmp.getNext());
+				tmp.getNext().setPrev(tmp.getPrev());
+				break;
+			}
+			c++;
+			tmp = tmp.getNext();
+		}
 	}
 	
 	public String toString() {

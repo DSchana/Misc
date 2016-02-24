@@ -6,7 +6,7 @@ public class LinkTest {
         nums.enqueue(38);
         nums.enqueue(43);
         System.out.println(nums);
-        System.out.println(nums.dequeue());
+        nums.deleteAt(3);
         System.out.println(nums);
     }
 }
