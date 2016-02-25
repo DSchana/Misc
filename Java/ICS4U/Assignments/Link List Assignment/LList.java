@@ -72,6 +72,16 @@ public class LList {
 			tmp = tmp.getNext();
 		}
 	}
+
+	public void sortedInsert(int n) {
+		LNode tmp = head;
+		while (tmp != null) {
+			if (tmp.getVal() >= n && tmp.getNext().getVal() <= n) {
+				
+			}
+			tmp = tmp.getNext();
+		}
+	}
 	
 	public String toString() {
 		String ans = "{";
