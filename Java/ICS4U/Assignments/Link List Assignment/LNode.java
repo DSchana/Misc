@@ -1,3 +1,7 @@
+// LNode.java
+// Dilpreet Chana
+// LNode class represents a node in a list with a specific value
+
 public class LNode {
 	private int val;
 	private LNode next;
@@ -27,6 +31,12 @@ public class LNode {
 
 	public void setPrev(LNode p) {
 		prev = p;
+	}
+
+	public void swap() {
+		LNode tmp = next;
+		next = prev;
+		prev = tmp;
 	}
 	
 	public String toString() {
