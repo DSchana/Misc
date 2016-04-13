@@ -103,14 +103,15 @@ public class BinaryTree {
 		if (branch == null) {
 			return dep;
 		}
-		if (depth(branch.getVal()) > dep)
-			dep = depth(branch.getVal());
-		return Math.max(height(branch.getLeft(), dep), height(branch.getRight(), dep));
+		return Math.max(height(branch.getLeft(), dep+1), height(branch.getRight(), dep+1));
 	}
 
 	// Return true if the difference in the max depth of left
 	// and right is less than or equal to 1
 	public boolean isBalanced() {
+		if (root == null) {
+			return true;
+		}
 		return Math.abs(height(root.getLeft(), 0) - height(root.getRight(), 0)) <= 1;
 	}
 
