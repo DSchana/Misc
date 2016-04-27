@@ -1,4 +1,6 @@
 // CollectionAssign1.java
+// Dilpreet Chana
+// Program goes through story and finds the frequency of all words.
 
 import java.util.*;
 import java.io.*;
@@ -16,11 +18,13 @@ public class CollectionAssign1 {
 		try {
 			fileIn = new Scanner(new File(fileName));
 
+			// Load words from file to words
 			while (fileIn.hasNext()) {
 				String[] lineWords = fileIn.nextLine().split(" ");
 				for (String word : lineWords) {
 					word = removePunc(word);
 
+					// New word
 					if (!words.containsKey(word)) {
 						words.put(word, 1);
 					}
@@ -32,6 +36,7 @@ public class CollectionAssign1 {
 				}
 			}
 
+			// Iterate through words and print everything
 			for (Map.Entry<String, Integer> entry : words.entrySet()) {
 				System.out.println("Word: " + entry.getKey() + " : " + ((float)entry.getValue()/(float)wordCount) * 100 + "%");
 			}

@@ -1,4 +1,8 @@
 // CollectionAssign4.java
+// Dilpreet Chana
+// Program reads from a text file and sorts the driving offences into a HashMap.
+// It then gives the user to option to see the record of a specific car by plate
+// number, or to add a new offence to the list.
 
 import java.util.*;
 import java.io.*;
@@ -10,13 +14,14 @@ public class CollectionAssign4 {
 
 		try {
 			fileIn = new Scanner(new File("cars.txt"));
-			int numCars = Integer.parseInt(fileIn.nextLine.trim());
+			int numCars = Integer.parseInt(fileIn.nextLine().trim());
 
 			// Loop through all cars
 			for (int i = 0; i < numCars; i++) {
 				String plate = fileIn.nextLine().trim();
 				int numOffence = Integer.parseInt(fileIn.nextLine().trim());
 
+				// Add new plate
 				if (offences.get(plate) == null) {
 					offences.put(plate, new LinkedList<String>());
 				}
@@ -36,12 +41,14 @@ public class CollectionAssign4 {
 		String userIn;
 
 		while (true) {
+			// User's options
 			System.out.println(
 				"1. Show all offences that belong to one plate\n
 				 2. Add offence\n
 				 3. Exit");
 
 			userIn = stdin.nextLine();
+
 			if (userIn.equals("1")) {
 				System.out.println("Enter plate number");
 				String plate = stdin.nextLine();

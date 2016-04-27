@@ -1,4 +1,8 @@
 // CollectionAssign3.java
+// Dilpreet Chana
+// Program reads in a file of names and movies
+// and outputs a list of movies and who wants
+// to watch them.
 
 import java.util.*;
 import java.io.*;
