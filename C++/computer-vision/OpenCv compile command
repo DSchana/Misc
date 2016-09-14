@@ -1,5 +1,0 @@
-OpenCv compile command
-
-Terminal:
-	g++ `pkg-config --libs --cflags opencv` -o cv cv.cpp
-	./cv <filename> This is for opening an image

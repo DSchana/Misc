@@ -1,9 +1,0 @@
-{
-	"dbURL":"mongodb://realtimeUser:starwars1998@ds033113.mongolab.com:33113/realtimechat",
-	"sessionSecret":"LDSIEM89SKFJA358342SFEAVUPQZX9236",
-	"fb":{
-		"appID":"1031899556862129",
-		"appSecret":"e99ac2e56a7fbedb7ac82dc82c553712",
-		"callBackURL":"http://localhost:3000/auth/facebook/callback"
-	}
-}

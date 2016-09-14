@@ -1,6 +1,0 @@
-C:\Users\dilpreet\Documents\GitHub\shits-and-giggles\C#\Strings\Strings\bin\Debug\Strings.exe.config
-C:\Users\dilpreet\Documents\GitHub\shits-and-giggles\C#\Strings\Strings\bin\Debug\Strings.exe
-C:\Users\dilpreet\Documents\GitHub\shits-and-giggles\C#\Strings\Strings\bin\Debug\Strings.pdb
-C:\Users\dilpreet\Documents\GitHub\shits-and-giggles\C#\Strings\Strings\obj\Debug\Strings.csprojResolveAssemblyReference.cache
-C:\Users\dilpreet\Documents\GitHub\shits-and-giggles\C#\Strings\Strings\obj\Debug\Strings.exe
-C:\Users\dilpreet\Documents\GitHub\shits-and-giggles\C#\Strings\Strings\obj\Debug\Strings.pdb
