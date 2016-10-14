@@ -1,0 +1,3 @@
+/Users/DSchana/Documents/GitHub/Pinch/Unix/CMakeFiles/edit_cache.dir
+/Users/DSchana/Documents/GitHub/Pinch/Unix/CMakeFiles/rebuild_cache.dir
+/Users/DSchana/Documents/GitHub/Pinch/Unix/CMakeFiles/Pinch.dir
