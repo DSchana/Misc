@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/DSchana/Documents/GitHub/Misc/C++/car/source/car.cpp
+car.h
+/Users/DSchana/Documents/GitHub/Misc/C++/car/source/car.h
+
+/Users/DSchana/Documents/GitHub/Misc/C++/car/source/car.h
+string
+-
+
+/Users/DSchana/Documents/GitHub/Misc/C++/car/source/test.cpp
+car.h
+/Users/DSchana/Documents/GitHub/Misc/C++/car/source/car.h
+cstdio
+-
+

@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/DSchana/Documents/GitHub/Misc/C++/CMakeFiles/3.7.0/CompilerIdCXX/CMakeCXXCompilerId.cpp
+
+/Users/DSchana/Documents/GitHub/Misc/C++/car test.cpp
+car.h
+/Users/DSchana/Documents/GitHub/Misc/C++/car.h
+cstdio
+-
+
+/Users/DSchana/Documents/GitHub/Misc/C++/car.cpp
+car.h
+/Users/DSchana/Documents/GitHub/Misc/C++/car.h
+
+/Users/DSchana/Documents/GitHub/Misc/C++/car.h
+string
+-
+

@@ -1,0 +1,18 @@
+1.
+a - legal
+b - legal
+c - not legal
+d - not legal
+e - legal
+
+3.
+bool weekends[7];
+weekends[0] = true;
+weekends[6] = true;
+
+for (int i = 1; i < 6; i++) {
+	weekends[i] = false;
+}
+
+4.
+bool weekends[] = { true, false, false, false, false, false, true };

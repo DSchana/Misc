@@ -1,3 +1,0 @@
-/home/dschana/Documents/GitHub/Misc/Playground/opencv/CMakeFiles/edit_cache.dir
-/home/dschana/Documents/GitHub/Misc/Playground/opencv/CMakeFiles/rebuild_cache.dir
-/home/dschana/Documents/GitHub/Misc/Playground/opencv/CMakeFiles/Playground.dir
