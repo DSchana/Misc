@@ -2,6 +2,8 @@
 #define CAR_H
 
 #include <string>
+#include <cmath>
+#include <map>
 
 using namespace std;
 
@@ -11,6 +13,7 @@ namespace test {
 		string model;
 		int hp;
 		int speed;
+		map<int, int> t_map;
 
 	public:
 		Car(string n_model, int n_hp);

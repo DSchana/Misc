@@ -13,6 +13,10 @@ car.h
 /Users/DSchana/Documents/GitHub/Misc/C++/car/source/car.h
 string
 -
+cmath
+-
+map
+-
 
 /Users/DSchana/Documents/GitHub/Misc/C++/car/source/test.cpp
 car.h
