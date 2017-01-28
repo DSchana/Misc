@@ -16,8 +16,8 @@ bool isPrime(int n);		   // Determine if n is prime
 int main() {
 	while (true) {
 		int s_in;
-		int curr = 2;  // Current prime
-		int d_count = 0;   // Number of primes displayed on a line
+		int curr = 2;  	  // Current prime
+		int d_count = 0;  // Number of primes displayed on a line
 
 		scanf("%d", &s_in);
 
@@ -38,7 +38,7 @@ int main() {
 			curr = findNextPrime(curr);
 
 			d_count++;
-			if (d_count == 9) {
+			if (d_count == 9) {  // End of line reached
 				printf("\n%6s", " ");
 				d_count = 0;
 			}
@@ -50,6 +50,13 @@ int main() {
 	return 0;
 }
 
+/*
+ * Description:	Calculate the number of times p divides into
+ *		the factorial of n.
+ * Parameters:	Integer n - number to be factorialed
+ * 		Integer p - a prime number
+ * Return:	The number of time p divides into n!
+**/
 int findPrimeCount(int n, int p) {
 	int p_count = 0;
 
@@ -64,6 +71,11 @@ int findPrimeCount(int n, int p) {
 	return p_count;
 }
 
+/*
+ * Description:	Calculate the next number in the set of prime numbers
+ * Parameters:	Integer p - a prime number
+ * Return:	The next number in the set of prime numbers
+**/
 int findNextPrime(int p) {
 	p++;
 
@@ -74,7 +86,17 @@ int findNextPrime(int p) {
 	return p;
 }
 
+/*
+ * Description: Determine if a number is prime
+ * Parameters:	Integer n - any number
+ * Return:	True if prime,
+ * 		False if not
+**/
 bool isPrime(int n) {
+	if (n < 2) {
+		return false;
+	}
+
 	// check if n has any factors other than 1, n
 	for (int i = 2; i < n / 2; i++) {
 		if (n % i == 0) {
