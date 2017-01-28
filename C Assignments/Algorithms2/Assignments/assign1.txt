@@ -1,0 +1,141 @@
+Script started on Fri Jan 27 23:46:55 2017
+[?1034hbash-3.2$ cat assign1.c
+/*
+ * Title:	assign1.c
+ * Author:	Dilpreet S. Chana
+ * Description:	Express a number's factorial as a linear
+ *		combination of the set of prime numbers.
+**/
+
+#include <stdio.h>
+#include <stdbool.h>
+
+// Prototypes
+int findPrimeCount(int n, int p);  // Get number of times p goes into n!
+int findNextPrime(int p);	   // Get the prime after p
+bool isPrime(int n);		   // Determine if n is prime
+
+int main() {
+	while (true) {
+		int s_in;
+		int curr = 2;  	  // Current prime
+		int d_count = 0;  // Number of primes displayed on a line
+
+		scanf("%d", &s_in);
+
+		if (s_in == 0) {
+			return 0;
+		}
+
+		printf("%3d! = ", s_in);
+
+		while (curr <= s_in) {
+			if (curr != 2) {
+				printf("*");
+			}
+
+			int p_count = findPrimeCount(s_in, curr);
+			printf("(%d^%d)", curr, p_count);
+
+			curr = findNextPrime(curr);
+
+			d_count++;
+			if (d_count == 9) {  // End of line reached
+				printf("\n%6s", " ");
+				d_count = 0;
+			}
+		}
+
+		printf("\n\n");
+	}
+
+	return 0;
+}
+
+/*
+ * Description:	Calculate the number of times p divides into
+ *		the factorial of n.
+ * Parameters:	Integer n - number to be factorialed
+ * 		Integer p - a prime number
+ * Return:	The number of time p divides into n!
+**/
+int findPrimeCount(int n, int p) {
+	int p_count = 0;
+
+	for (int i = 2; i <= n; i++) {
+		int tmp = i;
+		while (tmp % p == 0) {
+			p_count++;
+			tmp /= p;
+		}
+	}
+
+	return p_count;
+}
+
+/*
+ * Description:	Calculate the next number in the set of prime numbers
+ * Parameters:	Integer p - a prime number
+ * Return:	The next number in the set of prime numbers
+**/
+int findNextPrime(int p) {
+	p++;
+
+	while (!isPrime(p)) {
+		p++;
+	}
+
+	return p;
+}
+
+/*
+ * Description: Determine if a number is prime
+ * Parameters:	Integer n - any number
+ * Return:	True if prime,
+ * 		False if not
+**/
+bool isPrime(int n) {
+	if (n < 2) {
+		return false;
+	}
+
+	// check if n has any factors other than 1, n
+	for (int i = 2; i < n / 2; i++) {
+		if (n % i == 0) {
+			return 0;
+		}
+	}
+
+	return true;
+}
+bash-3.2$ cat assign1.[K[K[K[K[K[K[K[Kinput1.txt [K
+5
+53
+100
+61
+0
+bash-3.2$ gcc assign1.c -o assign1
+bash-3.2$ ./assign1 < input1.txt [K
+  5! = (2^3)*(3^1)*(4^1)*(5^1)
+
+ 53! = (2^49)*(3^23)*(4^16)*(5^12)*(7^8)*(11^4)*(13^4)*(17^3)*(19^2)
+      *(23^2)*(29^1)*(31^1)*(37^1)*(41^1)*(43^1)*(47^1)*(53^1)
+
+100! = (2^97)*(3^48)*(4^32)*(5^24)*(7^16)*(11^9)*(13^7)*(17^5)*(19^5)
+      *(23^4)*(29^3)*(31^3)*(37^2)*(41^2)*(43^2)*(47^2)*(53^1)*(59^1)
+      *(61^1)*(67^1)*(71^1)*(73^1)*(79^1)*(83^1)*(89^1)*(97^1)
+
+ 61! = (2^56)*(3^28)*(4^18)*(5^14)*(7^9)*(11^5)*(13^4)*(17^3)*(19^3)
+      *(23^2)*(29^2)*(31^1)*(37^1)*(41^1)*(43^1)*(47^1)*(53^1)*(59^1)
+      *(61^1)
+
+bash-3.2$ ls -l
+total 48
+-rwxr-xr-x  1 DSchana  staff  8624 27 Jan 23:47 assign1
+-rw-r--r--  1 DSchana  staff  1946 27 Jan 23:46 assign1.c
+-rw-r--r--  1 DSchana  staff  2297 27 Jan 23:46 assign1.txt
+-rw-r--r--  1 DSchana  staff    14 26 Jan 10:21 input1.txt
+bash-3.2$ exit
+exit
+
+Script done on Fri Jan 27 23:47:41 2017
