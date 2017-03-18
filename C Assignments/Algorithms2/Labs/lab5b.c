@@ -1,3 +1,9 @@
+/*
+ * Title:	lab5b.c
+ * Author:	Dilpreet Chana
+ * Description:	Various functions on arrays using pointers
+**/
+
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>

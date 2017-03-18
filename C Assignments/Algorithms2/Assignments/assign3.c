@@ -1,51 +1,31 @@
+/*
+ * Title:	assign3.c
+ * Author:	Dilpreet S. Chana
+ * Description:	Text analyzer that shows various details
+ *		about a given text.
+**/
+
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
 
-void letterAnalysis(char s[][80], int l);			   // prints a table indicating the number of occurrences of
-													   // each letter of the alphabet in the complete text
+void letterAnalysis(char s[][80], int l);	       // prints a table indicating the number of occurrences of
+						       // each letter of the alphabet in the complete text
 int wordLengthAnalysis(char s[][80], int l, int len);  // returns the number of occurrences of words with
-													   // that length appearing in the text
-void wordAnalysis(char s[][80], int l);				   // prints a table indicating the number of occurrences 
-													   // of each different word in the text
+						       // that length appearing in the text
+void wordAnalysis(char s[][80], int l);                // prints a table indicating the number of occurrences 
+						       // of each different word in the text
 
 int main() {
-	int num_lines;
+	int num_lines = 0;
 
-	//scanf("%d", &num_lines);
+	scanf("%d", &num_lines);
 
-	/*
-	for (int i = 0; i < num_lines; i++) {
-		scanf("%s", &story[i]);
-	}
+	char story[10][80] = { { 0 } };
 
-	for (int i = 0; i < num_lines; i++) {
-		for (int j = 0; j < 80; j++) {
-			int check = tolower(story[i][j]);
-			printf("%c", story[i][j]);
-		}
-	}
-	*/
-
-	// Read story
-	char line_char[10];
-	fgets(line_char, 10, stdin);
-	num_lines = line_char[0] - '0';  // If you have a character representing an integer, subtracting '0' returns the integer value of that character
-
-	printf("%d\n", num_lines);
-
-	char story[num_lines][80];
-
-	for (int i = 0; i < num_lines; i++) {
+	// Read story 
+	for (int i = 0; i <= num_lines; i++) {
 		fgets(story[i], 80, stdin);  // Reads each line from the file into a row of the lines array
-	}
-
-
-	for (int i = 0; i < num_lines; i++) {
-		for (int j = 0; j < 80; j++) {
-			int check = tolower(story[i][j]);
-			printf("%c", story[i][j]);
-		}
 	}
 
 	printf("Total Letter Count:\n");
@@ -53,25 +33,37 @@ int main() {
 
 	printf("\nWord Lengths:\n");
 	for (int i = 1; i <= 20; i++) {
-		printf("%2d word(s) of length %d\n", wordLengthAnalysis(story, num_lines, i), i);
+		int w_len = wordLengthAnalysis(story, num_lines, i);
+
+		if (w_len == 1) {
+			printf("%2d word of length %d\n", w_len, i);
+		}
+		else {
+			printf("%2d words of length %d\n", w_len, i);
+		}
 	}
+
+	printf("Word Frequencies:\n");
+	wordAnalysis(story, num_lines);
 
 	return 0;
 }
 
+/*
+ * Description:	Display the frequency of each letter
+ * Parameters:	2d array: The text to analyze
+ *		Integer: Number of lines in text
+ * Returns:	void
+**/
 void letterAnalysis(char s[][80], int l) {
 	// 97 - 122
-	int let[26];
+	int let[26] = { 0 };
 
-	for (int i = 97; i < 123; i++) {
-		let[i - 97] = 0;
-	}
-
-	for (int i = 0; i < l; i++) {
+	for (int i = 1; i <= l; i++) {
 		for (int j = 0; j < 80; j++) {
-			int check = tolower(s[i][j]);
-			if (check <= 122 && check >= 97) {
-				let[check - 97]++;
+			if (isalpha(s[i][j])) {
+				char curr = tolower(s[i][j]);
+				let[curr - 'a']++;
 			}
 		}
 	}
@@ -81,35 +73,122 @@ void letterAnalysis(char s[][80], int l) {
 	}
 }
 
+/*
+ * Description: Count the number of words with a specified length
+ * Parameters:  2d array: The text to analyze
+ *              Integer l: Number of lines in text
+ *		Integer len: Target word size
+ * Returns:     Number of words with length len
+**/
 int wordLengthAnalysis(char s[][80], int l, int len) {
 	int tot = 0;
 
-	for (int i = 0; i < l; i++) {
-		char *pch = strtok(s[i], " ,.-");
-
-		while (pch != NULL) {
-			if (strlen(pch) == len) {
-				tot++;
+	for (int i = 1; i <= l; i++) {
+		int curr_len = 0;
+		for (int j = 0; j < 80; j++) {
+			if (!isblank(s[i][j] && s[i][j] != 0 && !iscntrl(s[i][j]))) {
+				curr_len++;
 			}
+			else if (s[i][j] == 0 || isblank(s[i][j])) {
+				if (curr_len == len) {
+					tot++;
+				}
 
-			pch = strtok(NULL, " ,.-");
+				curr_len = 0;
+			}
 		}
 	}
 
 	return tot;
 }
 
+/*
+ * Description: Display the frequency of each word
+ * Parameters:  2d array: The text to analyze
+ *              Integer: Number of lines in text
+ * Returns:     void
+**/
 void wordAnalysis(char s[][80], int l) {
-	int tot = 0;
-	for (int i = 0; i < l; i++) {
-		char *pch = strtok(s[i], " ,.-");
+	char s_copy[10][80];
+	char *tkn;
 
-		while (pch != NULL) {
-			if ((unsigned)strlen(pch) == 7) {
-				tot++;
+	int word_count = 0;
+	int largest = 0;
+
+	for (int i = 0; i < 10; i++) {
+		strcpy(s_copy[i], s[i]);
+	}
+
+	for (int i = 1; i <= l; i++) {
+		tkn = strtok(s[i], " \n\r\b\t");
+
+		while (tkn != NULL) {
+			word_count++;
+			tkn = strtok(NULL, " \n\r\b\t");
+		}
+	}
+
+	char words[word_count][20];
+	int word_freq[word_count];
+	int word_pos = 0;
+
+	memset(words, 0, sizeof(words[0][0]) * word_count * 20);
+	memset(word_freq, 0, sizeof(word_freq[0]) * word_count);
+
+	// Fill the words array
+	for (int i = 1; i < l; i++) {
+		tkn = strtok(NULL, " \n\r\b\t");
+
+		while (tkn != NULL) {
+			strcpy(words[word_pos], tkn);
+
+			word_pos++;
+			tkn = strtok(NULL, " \n\r\b\t");
+		}
+	}
+
+	// Count frequencies
+	for (int i = 0; i < word_count; i++) {
+		if (strcmp(words[i], " ") != 0) {
+			for (int j = i; j < word_count; j++) {
+				if (strcmp(words[i], words[j]) == 0) {
+					word_freq[i]++;
+					if (i != j) {
+						strcpy(words[j], " ");  // Mark as analyzed
+					}
+				}
+			}
+		}
+	}
+
+	// Find largest word size
+	for (int i = 0; i < word_count; i++) {
+		int curr_len = 0;
+		for (int j = 0; j < 20; j++) {
+			if (words[i][j] != 0) {
+				curr_len++;
+			}
+		}
+
+		if (curr_len > largest) {
+			largest = curr_len;
+		}
+	}
+
+	// Print table
+	for (int i = 0; i < word_count; i++) {
+		if (word_freq[i] > 0) {
+			printf("\"%s\"", words[i]);
+			for (int j = 0; j < largest - strlen(words[i]); j++) {
+				printf(" ");
 			}
 
-			pch = strtok(NULL, " ,.-");
+			if (word_freq[i] == 1) {
+				printf(" appeared 1 time\n");
+			}
+			else {
+				printf(" appeared %d times\n", word_freq[i]);
+			}
 		}
 	}
 }
