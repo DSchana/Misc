@@ -8,19 +8,24 @@ using namespace cv;
 
 int main() {
 	VideoCapture capture(0);
-	Mat frame;
+	Mat frame, frame_hsl;
 
-	int H, S, L;
+	int lightness;
 
 	if (!capture.isOpened()) {
 		return -1;
 	}
 
+	capture >> frame;
+	cvtColor(frame, frame_hsl, CV_RGB2HLS);
+
 	// Create trackbars for HSL
-	createTrackbar("Hue", "Frame", &H);
+	createTrackbar("Hue", "Frame", &lightness);
 
 	while (capture.read(frame)) {
-		imshow("Frame", frame);
+		cvtColor(frame, frame_hsl, CV_RGB2HLS);
+
+		imshow("Frame", frame_hsl);
 
 		if (char(waitKey(10)) == 27) {
 			break;
