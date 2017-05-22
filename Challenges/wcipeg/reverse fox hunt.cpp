@@ -26,6 +26,8 @@ int main() {
 				}
 			}
 		}
+
+		// TODO: Traverse map from curr_x, curr_y
 	}
 
 	return 0;

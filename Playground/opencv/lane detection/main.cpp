@@ -18,14 +18,19 @@ int main() {
 		return -1;
 	}
 
-	while (capture.read(frame)) {
+	frame = imread("images/road2.jpg");
+
+	while (true) {
+		/*
 		capture >> frame;
+
+		if (frame.empty()) {
+			break;
+		}
+		*/
 
 		frame.copyTo(three_edgy_five_me);
 		detectEdges(frame, three_edgy_five_me);
-
-		//namedWindow("Frame", WINDOW_AUTOSIZE);
-		//namedWindow("3 Edgy 5 Me", WINDOW_AUTOSIZE);
 
 		if (!frame.empty()) {
 			imshow("Frame", frame);
