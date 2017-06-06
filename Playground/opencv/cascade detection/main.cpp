@@ -39,7 +39,16 @@ int main() {
 		vector<Rect> obj;
 		Mat frame_gray, frame_gray_blur;
 
-	while (capture.read(frame)) {
+	while (true) {
+		/*
+		capture >> frame;
+
+		if (frame.empty()) {
+			break;
+		}
+		*/
+		frame = imread("images/people.jpg");
+
 		cvtColor(frame, frame_gray, CV_BGR2GRAY);
 		equalizeHist(frame_gray, frame_gray);
 		GaussianBlur(frame_gray, frame_gray_blur, Size(3, 3), 0, 0);  // Remove this bit if the blur is making the detection not work.
