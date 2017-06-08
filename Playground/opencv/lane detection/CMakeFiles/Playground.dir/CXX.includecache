@@ -6,13 +6,13 @@
 
 #IncludeRegexTransform: 
 
-/Users/DSchana/Documents/GitHub/Misc/Playground/opencv/lane detection/main.cpp
+/mnt/c/Users/DSchana/Documents/GitHub/Misc/Playground/opencv/lane detection/main.cpp
 opencv2/highgui.hpp
-/Users/DSchana/Documents/GitHub/Misc/Playground/opencv/lane detection/opencv2/highgui.hpp
+/mnt/c/Users/DSchana/Documents/GitHub/Misc/Playground/opencv/lane detection/opencv2/highgui.hpp
 opencv2/objdetect.hpp
-/Users/DSchana/Documents/GitHub/Misc/Playground/opencv/lane detection/opencv2/objdetect.hpp
+/mnt/c/Users/DSchana/Documents/GitHub/Misc/Playground/opencv/lane detection/opencv2/objdetect.hpp
 opencv2/imgproc.hpp
-/Users/DSchana/Documents/GitHub/Misc/Playground/opencv/lane detection/opencv2/imgproc.hpp
+/mnt/c/Users/DSchana/Documents/GitHub/Misc/Playground/opencv/lane detection/opencv2/imgproc.hpp
 
 /usr/local/include/opencv/cxcore.h
 opencv2/core/core_c.h
