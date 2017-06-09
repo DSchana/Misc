@@ -61,5 +61,5 @@ void detectEdges(Mat frame, Mat detected_edges) {
 	// DISPLAY
 	imshow("Edges", detected_edges_inv);
 
-	
+	// Find lines 
 }
