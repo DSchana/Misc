@@ -1,9 +1,17 @@
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 
 int main() {
-	sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
+	sf::RenderWindow window(sf::VideoMode(800, 600), "SFML works!");
+
+	// Circle
 	sf::CircleShape shape(100.f);
 	shape.setFillColor(sf::Color::Green);
+
+	// Load texture
+	sf::Texture texture;
+	texture.loadFromFile("TED.png");
+	sf::Sprite sprite(texture);
 
 	while (window.isOpen()) {
 		sf::Event event;
@@ -15,6 +23,7 @@ int main() {
 
 		window.clear();
 		window.draw(shape);
+		window.draw(sprite);
 		window.display();
 	}
 
