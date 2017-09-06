@@ -1,8 +1,11 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
+#include <SFML/Window/Mouse.hpp>
 
 int main() {
+	// Setup
 	sf::RenderWindow window(sf::VideoMode(800, 600), "SFML works!");
+	sf::Vector2i mouse_pos;
 
 	// Circle
 	sf::CircleShape shape(100.f);
@@ -20,6 +23,11 @@ int main() {
 				window.close();
 			}
 		}
+
+		mouse_pos = sf::Mouse::getPosition(window);
+		sprite.setPosition((sf::Vector2f)mouse_pos);
+
+		printf("%d, %d\n", mouse_pos.x, mouse_pos.y);
 
 		window.clear();
 		window.draw(shape);
