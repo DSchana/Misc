@@ -211,6 +211,7 @@ void editPostList(vector<Post> *posts, bool addition) {
 }
 
 void sort(vector<Post> *posts, int condition) {
+	// Eh maybe just do with bubble sort. easy winz.
 	int max = INT_MIN;
 	int min = INT_MAX;
 
@@ -224,8 +225,12 @@ void sort(vector<Post> *posts, int condition) {
 
 		int radix[max - min];
 
+		for (int i = 0; i < max - min; i++) {
+			radix[i] = 0;
+		}
+
 		for (int i = 0; i < posts->size(); i++) {
-			radix[(*posts)[i - min]]
+			radix[(*posts)[i].likes - min]++;
 		}
 		break;
 	case 2:
