@@ -1,6 +1,7 @@
 #include <cstdio>
 #include <string>
 #include <vector>
+#include <climits>
 
 using namespace std;
 
@@ -210,5 +211,33 @@ void editPostList(vector<Post> *posts, bool addition) {
 }
 
 void sort(vector<Post> *posts, int condition) {
-	// All by int
+	int max = INT_MIN;
+	int min = INT_MAX;
+
+	switch (condition) {
+	case 1:
+		// Likes
+		for (int i = 0; i < posts->size(); i++) {
+			max = (*posts)[i].likes > max ? (*posts)[i].likes : max;
+			min = (*posts)[i].likes < min ? (*posts)[i].likes : min;
+		}
+
+		int radix[max - min];
+
+		for (int i = 0; i < posts->size(); i++) {
+			radix[(*posts)[i - min]]
+		}
+		break;
+	case 2:
+		// Comments
+		break;
+	case 3:
+		// Date
+		break;
+	case 4:
+		// Size
+		break;
+	default:
+		break;
+	}
 }
