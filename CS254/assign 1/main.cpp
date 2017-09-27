@@ -101,7 +101,7 @@ void showPosts(vector<Post> posts, bool conditional = false) {
 			for (int i = 0; i < posts.size(); i++) {
 				if (posts[i].likes == target) {
 					printf("%s posted a %d character post on %d. It received %d likes and %d comments.\n", posts[i].name, posts[i].size, posts[i].date, posts[i].likes, posts[i].comments);
-					break;
+					return;
 				}
 			}
 			printf("No records found.\n");
@@ -113,7 +113,7 @@ void showPosts(vector<Post> posts, bool conditional = false) {
 			for (int i = 0; i < posts.size(); i++) {
 				if (posts[i].comments == target) {
 					printf("%s posted a %d character post on %d. It received %d likes and %d comments.\n", posts[i].name, posts[i].size, posts[i].date, posts[i].likes, posts[i].comments);
-					break;
+					return;
 				}
 			}
 			printf("No records found.\n");
@@ -125,7 +125,7 @@ void showPosts(vector<Post> posts, bool conditional = false) {
 			for (int i = 0; i < posts.size(); i++) {
 				if (posts[i].date == target) {
 					printf("%s posted a %d character post on %d. It received %d likes and %d comments.\n", posts[i].name, posts[i].size, posts[i].date, posts[i].likes, posts[i].comments);
-					break;
+					return;
 				}
 			}
 			printf("No records found.\n");
@@ -137,7 +137,7 @@ void showPosts(vector<Post> posts, bool conditional = false) {
 			for (int i = 0; i < posts.size(); i++) {
 				if (posts[i].size == target) {
 					printf("%s posted a %d character post on %d. It received %d likes and %d comments.\n", posts[i].name, posts[i].size, posts[i].date, posts[i].likes, posts[i].comments);
-					break;
+					return;
 				}
 			}
 			printf("No records found.\n");
@@ -149,7 +149,7 @@ void showPosts(vector<Post> posts, bool conditional = false) {
 			for (int i = 0; i < posts.size(); i++) {
 				if (posts[i].name == s_target) {
 					printf("%s posted a %d character post on %d. It received %d likes and %d comments.\n", posts[i].name, posts[i].size, posts[i].date, posts[i].likes, posts[i].comments);
-					break;
+					return;
 				}
 			}
 			printf("No records found.\n");
@@ -200,7 +200,7 @@ void editPostList(vector<Post> *posts, bool addition) {
 			scanf("%s", s_target);
 
 			for (int i = 0; i < (*posts).size(); i++) {
-				if ((*posts)[i].name == s_target) {
+				if (strcmp((*posts)[i].name, s_target) == 0) {
 					(*posts).erase((*posts).begin() + i);
 				}
 			}
