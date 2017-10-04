@@ -1,0 +1,6 @@
+Part 1
+head -n 3 headandtail | tail -n 2
+
+Part 2
+grep -n line < headandtail | cut -d : -f 1
+grep -n line < headandtail | head -c 1
