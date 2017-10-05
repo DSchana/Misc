@@ -1,6 +1,9 @@
 /*
  * Author:	Dilpreet Chana
  * Title:	P1.java
+ *
+ * Description:	It's black magic, I ain't gotta explain shit.
+		JK, this calculates interest for 3 years.
 **/
 
 public class P1 {
