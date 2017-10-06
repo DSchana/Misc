@@ -1,7 +1,16 @@
+/*
+ * Title:	merge.c
+ * Author:	Dilpreet S. Chana
+ * Description:	Place small image into top right corner of
+ *		larger image. Only accepts ppm file types.
+ * Usage:	./merge image_1 image_2 new_image
+**/
+
 #include <unistd.h>
 #include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 int readHeader(int fd, char type[3], char width[5], char height[5]);
 
@@ -15,8 +24,8 @@ int main(int arg_c, char *arg_v[]) {
 	char type_1[3], width_1[5], height_1[5], type_2[3], width_2[5], height_2[5];
 	int w_1, h_1, w_2, h_2;
 
-	int size_length = readHeader(img_1, type_1, width_1, height_1);
-	readHeader(img_2, type_2, width_2, height_2);
+	int size_len_1 = readHeader(img_1, type_1, width_1, height_1);
+	int size_len_2 = readHeader(img_2, type_2, width_2, height_2);
 
 	w_1 = atoi(width_1);
 	h_1 = atoi(height_1);
@@ -24,15 +33,15 @@ int main(int arg_c, char *arg_v[]) {
 	h_2 = atoi(height_2);
 
 	// Error if image formats are invalid
-	if (w_1 < w_2 || h1 < h2 || strcmp(type_1, "P6") != 0 || strcmp(type_2, "P6") != 0) return -1;
+	if (w_1 < w_2 || h_1 < h_2 || strcmp(type_1, "P6") != 0 || strcmp(type_2, "P6") != 0) return -1;
 
 	int n_img = open(arg_v[3], O_WRONLY | O_CREAT | O_TRUNC, 0777);
 
 	// Write new image header
-	char tmp[size_length];
+	char tmp[size_len_1];
 	lseek(img_1, 0, SEEK_SET);
-	read(img_1, tmp, size_length);
-	write(n_img, tmp, size_length);
+	read(img_1, tmp, size_len_1);
+	write(n_img, tmp, size_len_1);
 
 	// Write image 1 to new image
 	for (int i = 0; i < h_1; i++) {
@@ -41,7 +50,8 @@ int main(int arg_c, char *arg_v[]) {
 		write(n_img, buff, w_1 * 3);
 	}
 
-	lseek(n_img, size_length, SEEK_SET);
+	lseek(n_img, size_len_1, SEEK_SET);
+	lseek(img_2, size_len_2, SEEK_SET);
 
 	// Write image 2 to new image
 	for (int i = 0; i < h_2; i++) {
@@ -59,7 +69,7 @@ int main(int arg_c, char *arg_v[]) {
 }
 
 int readHeader(int fd, char type[3], char width[5], char height[5]) {
-	count = 7;
+	int count = 7;
 	read(fd, type, 2);
 	lseek(fd, 1, SEEK_CUR);
 
