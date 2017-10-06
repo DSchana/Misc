@@ -12,7 +12,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-int readHeader(int fd, char type[3], char width[5], char height[5]);
+int readHeader(int fd, char type[3], char width[5], char height[5]);  // Read header of image file
 
 int main(int arg_c, char *arg_v[]) {
 	if (arg_c != 4) return -1;
@@ -68,6 +68,15 @@ int main(int arg_c, char *arg_v[]) {
 	return 0;
 }
 
+/*
+ * Description:	Read header of ppm image file to obtain image dimensions.
+ * Parameters:	Integer - fd: Image file id
+ *		Character array - type: Image type
+ *		Character array - width: Image width
+ *		Character array - height: Image height
+ * Returns:	Integer: Location of file where image data begins.
+ *			 Where the header ends.
+**/
 int readHeader(int fd, char type[3], char width[5], char height[5]) {
 	int count = 7;
 	read(fd, type, 2);
