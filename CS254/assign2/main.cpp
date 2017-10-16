@@ -5,10 +5,9 @@
 #include <sstream>
 #include <vector>
 #include "Stack.h"
+#include "Stack.cpp"
 
 using namespace std;
-
-// TODO: Try to redo infix if not working
 
 int getPrecedence(string c);
 int evaluate(int n1, int n2, string op);
@@ -19,16 +18,22 @@ int main() {
 	vector<string> eqns;
 	string line;
 
-	while (getline(infile, line)) eqns.push_back(line);
+	while (getline(infile, line)) {
+		eqns.push_back(line);
+	}
 
-	for (string e : eqns) {
+	for (int f = 0; f < eqns.size(); f++) {
+		printf("====== Equation %d ======\n", f + 1);
+		string e = eqns[f];
 		int bracket_count = 0;
 		bool invalid = false;
 		string last = "";
 		vector<string> tokens = split(e);
 
+		// Validate equation as infix
 		for (size_t i = 0; i < tokens.size(); i++) {
 			string c = tokens[i];
+			//printf("CURR: %s\n", c.c_str());
 
 			// Check for unary negation
 			if (c == "-" && (i == 0 || getPrecedence(last)) && last != ")") {
@@ -51,7 +56,7 @@ int main() {
 				if (c == "(") bracket_count++;
 				else if (c == ")") bracket_count--;
 
-				if (i != 0 && ((getPrecedence(last) > 0 && getPrecedence(c) > 0) || (getPrecedence(last) == 0 && getPrecedence(c) == 0) || (bracket_count < 0))) {
+				if (i != 0 && ((getPrecedence(last) > 0 && getPrecedence(c) > 0 && getPrecedence(last) < 5 && getPrecedence(c) < 5) || (getPrecedence(last) == 0 && getPrecedence(c) == 0) || (bracket_count < 0))) {
 					printf("Invalid: %s\n", c.c_str());
 					invalid = true;
 				}
@@ -80,12 +85,12 @@ int main() {
 
 			int curr_prec = getPrecedence(curr);
 
+			printf("CURR: %s\n", curr.c_str());
 			if (curr_prec > 0) {  // Operator
-				if (ops.getTop() != NULL) {
+				if (!ops.empty()) {
 					string top = ops.getTop();
 
 					int top_prec = getPrecedence(top);
-
 					if (top == "~" && curr == "~") {
 						printf("Operator stack: %s\n", ops.to_string());
 						ops.push(curr);
@@ -98,8 +103,8 @@ int main() {
 
 						top = ops.getTop();
 
-						if (ops.getTop() != NULL) top_prec = getPrecedence(top);
-						while (ops.getTop() != NULL && curr_prec < top_prec && top_prec != 5) {
+						if (!ops.empty()) top_prec = getPrecedence(top);
+						while (!ops.empty() && curr_prec < top_prec && top_prec != 5) {
 							post += ops.pop() + " ";
 							printf("Operator stack: %s\n", ops.to_string());
 						}
@@ -107,9 +112,12 @@ int main() {
 						printf("Operator stack: %s\n", ops.to_string());
 					}
 					else if (curr == ")") {
+						printf("1\n");
 						printf("Operator stack: %s\n", ops.to_string());
 						while (ops.getTop() != "(") {
+							printf("2\n");
 							post += ops.pop() + " ";
+							printf("3\n");
 							printf("Operator stack: %s\n", ops.to_string());
 						}
 
@@ -133,7 +141,7 @@ int main() {
 			}
 		}
 		printf("Operator stack: %s\n", ops.to_string());
-		while (ops.getTop() != NULL) {
+		while (!ops.empty()) {
 			post += ops.getTop() + " ";
 			ops.pop();
 			printf("Operator stack: %s\n", ops.to_string());
@@ -198,13 +206,18 @@ int evaluate(int n1, int n2, string op) {
 }
 
 vector<string> split(string s) {
+	//printf("7\n");
+	//printf("%s\n", s.c_str());
 	vector<string> ret;
 
 	while (s.find(" ") != string::npos) {
+		//printf("%s\n", s.c_str());
 		size_t pos = s.find(" ");
 		ret.push_back(s.substr(0, pos));
-		s.erase(s.begin(), s.begin() + pos);
+		s.erase(s.begin(), s.begin() + pos + 1);
 	}
+	
+	//printf("9\n");
 	ret.push_back(s);
 
 	return ret;

@@ -1,45 +1,58 @@
-#include <Stack.h>
+#include "Stack.h"
+#include <cstdio>
 #include <vector>
 #include <sstream>
 #include <string>
 
 using namespace std;
 
-Stack::Stack() {
+template <class T>
+Stack<T>::Stack() {
 	size = 0;
 }
 
-void Stack::push(T n) {
+template <class T>
+void Stack<T>::push(T n) {
 	elements.push_back(n);
 	size++;
 }
 
-T Stack::pop() {
-	if (size > 0) {
-		T tmp = elements[size - 1];
-		elements.erase(elements.end());
-		size--;
-
-		return tmp;
+template <class T>
+bool Stack<T>::empty() {
+	if (size == 0) {
+		return true;
 	}
-
-	return NULL;
+	return false;
 }
 
-T Stack::getTop() {
-	if (size > 0) {
-		return elements[size - 1];
-	}
+template <class T>
+T Stack<T>::pop() {
+	assert(size > 0);
 
-	return NULL;
+	T tmp = elements[size - 1];
+	elements.erase(elements.end());
+	size--;
+
+	return tmp;
 }
 
-char* Stack::to_string() {
+template <class T>
+T Stack<T>::getTop() {
+	assert(size > 0);
+
+	return elements[size - 1];
+}
+
+template <class T>
+char* Stack<T>::to_string() {
 	stringstream ss;
 
 	for (int i = 0; i < size; i++) {
 		ss << elements[i] << ' ';
 	}
 
-	return ss.str().c_str();
+	char ret[1024];
+	strcpy(ret, ss.str().c_str());
+
+	return ret;
 }

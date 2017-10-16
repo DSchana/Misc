@@ -2,6 +2,7 @@
 #define STACK_H
 
 #include <vector>
+#include <assert.h>
 
 template <class T>
 class Stack {
@@ -12,6 +13,7 @@ private:
 public:
 	Stack();
 	void push(T n);
+	bool empty();
 	T pop();
 	T getTop();
 	char* to_string();

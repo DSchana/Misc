@@ -6,11 +6,25 @@
 
 #IncludeRegexTransform: 
 
-/Users/dilpreetchana/Documents/GitHub/Misc/CS254/assign2/Stack.h
+/Users/DSchana/Documents/GitHub/Misc/CS254/assign2/Stack.cpp
+Stack.h
+/Users/DSchana/Documents/GitHub/Misc/CS254/assign2/Stack.h
+cstdio
+-
 vector
 -
+sstream
+-
+string
+-
 
-/Users/dilpreetchana/Documents/GitHub/Misc/CS254/assign2/main.cpp
+/Users/DSchana/Documents/GitHub/Misc/CS254/assign2/Stack.h
+vector
+-
+assert.h
+-
+
+/Users/DSchana/Documents/GitHub/Misc/CS254/assign2/main.cpp
 cstdio
 -
 cmath
@@ -24,5 +38,7 @@ sstream
 vector
 -
 Stack.h
-/Users/dilpreetchana/Documents/GitHub/Misc/CS254/assign2/Stack.h
+/Users/DSchana/Documents/GitHub/Misc/CS254/assign2/Stack.h
+Stack.cpp
+/Users/DSchana/Documents/GitHub/Misc/CS254/assign2/Stack.cpp
 
