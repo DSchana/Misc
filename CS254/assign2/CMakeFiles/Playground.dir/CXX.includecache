@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/dilpreetchana/Documents/GitHub/Misc/CS254/assign2/Stack.h
+vector
+-
+
+/Users/dilpreetchana/Documents/GitHub/Misc/CS254/assign2/main.cpp
+cstdio
+-
+cmath
+-
+string
+-
+fstream
+-
+sstream
+-
+vector
+-
+Stack.h
+/Users/dilpreetchana/Documents/GitHub/Misc/CS254/assign2/Stack.h
+

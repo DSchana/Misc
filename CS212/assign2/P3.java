@@ -1,3 +1,9 @@
+/*
+ * Title:	P3.java
+ * Author:	Dilpreet S. Chana
+ * Description:	Test for BankAccount class
+**/
+
 public class P3 {
 	public static void main(String[] args) {
 		BankAccount ba = new BankAccount(0, 1.00);
