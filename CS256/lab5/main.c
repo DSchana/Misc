@@ -39,4 +39,6 @@ int main(int argc, char *argv[]){
 	}
 	sleep(atoi(argv[processNum]));
 	printf("process %d terminated pid=%d\n", processNum,getpid());
+
+	return 0;
 }
