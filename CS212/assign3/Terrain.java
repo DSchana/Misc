@@ -1,9 +1,9 @@
 import java.util.*;
 
 public class Terrain {
-	private ArrayList<ArrayList<int>> heights = new ArrayList();
-	private width;
-	private height;
+	private ArrayList<ArrayList<Integer>> heights = new ArrayList();
+	private int width;
+	private int height;
 
 	public Terrain(int w, int h) {
 		for (int i = 0; i < w; i++) {
@@ -14,16 +14,20 @@ public class Terrain {
 		height = h;
 	}
 
-	public void populate(ArrayList<ArrayList<int>> a) {
-		heights = a;
+	public void populate(int[][] a) {
+		for (int i = 0; i < a.length; i++) {
+			for (int j = 0; j < a[0].length; j++) {
+				heights.get(i).add(a[i][j]);
+			}
+		}
 	}
 
 	public int highest() {
 		int ret = 0;
 
-		for (int i = 0; i < w; i++) {
-			for (int j = 0; j < h; j++) {
-				ret = heights[i][j] > ret ? heights[i][j] : ret;
+		for (int i = 0; i < width; i++) {
+			for (int j = 0; j < height; j++) {
+				ret = heights.get(i).get(j) > ret ? heights.get(i).get(j) : ret;
 			}
 		}
 
@@ -33,9 +37,9 @@ public class Terrain {
 	public int lowest() {
 		int ret = Integer.MAX_VALUE;
 
-		for (int i = 0; i < w; i++) {
-			for (int j = 0; j < h; j++) {
-				ret = heights[i][j] < ret ? heights[i][j] : ret;
+		for (int i = 0; i < width; i++) {
+			for (int j = 0; j < height; j++) {
+				ret = heights.get(i).get(j) < ret ? heights.get(i).get(j) : ret;
 			}
 		}
 
@@ -43,9 +47,9 @@ public class Terrain {
 	}
 
 	public void flood(int h) {
-		for (int i = 0; i < w; i++) {
-			for (int j = 0; j < h; j++) {
-				System.out.println("%s ", heights[i][j] <= h ? "*" : "-");
+		for (int i = 0; i < width; i++) {
+			for (int j = 0; j < height; j++) {
+				System.out.printf("%s ", heights.get(i).get(j) <= height ? "*" : "-");
 			}
 			System.out.println();
 		}
