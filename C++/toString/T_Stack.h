@@ -4,7 +4,7 @@
 #include <vector>
 #include <assert.h>
 
-template <class T>
+template <typename T>
 class Stack {
 private:
 	std::vector<T> elements;
@@ -17,7 +17,7 @@ public:
 	T pop();
 	T getTop();
 	char* to_string();
-	friend std::ostream& operator <<(std::ostream &strm, const Stack &s);
+	friend std::ostream& operator<<(std::ostream &strm, const Stack<T> &s);
 };
 
 #endif

@@ -1,3 +1,10 @@
+/*
+ * Title:	P4.java
+ * Author:	Dilpreet S. Chana
+ * Description:	Create terrain height map and show where flooding
+ *		would occur given a water level.
+**/
+
 import java.util.*;
 
 public class P4 {

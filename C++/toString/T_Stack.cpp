@@ -1,4 +1,4 @@
-#include "Stack.h"
+#include "T_Stack.h"
 #include <cstdio>
 #include <vector>
 #include <sstream>
@@ -6,18 +6,18 @@
 
 using namespace std;
 
-template <class T>
+template <typename T>
 Stack<T>::Stack() {
 	size = 0;
 }
 
-template <class T>
+template <typename T>
 void Stack<T>::push(T n) {
 	elements.push_back(n);
 	size++;
 }
 
-template <class T>
+template <typename T>
 bool Stack<T>::empty() {
 	if (size == 0) {
 		return true;
@@ -25,7 +25,7 @@ bool Stack<T>::empty() {
 	return false;
 }
 
-template <class T>
+template <typename T>
 T Stack<T>::pop() {
 	assert(size > 0);
 
@@ -36,14 +36,14 @@ T Stack<T>::pop() {
 	return tmp;
 }
 
-template <class T>
+template <typename T>
 T Stack<T>::getTop() {
 	assert(size > 0);
 
 	return elements[size - 1];
 }
 
-template <class T>
+template <typename T>
 char* Stack<T>::to_string() {
 	stringstream ss;
 
@@ -57,7 +57,11 @@ char* Stack<T>::to_string() {
 	return ret;
 }
 
-template <class T>
-friend std::ostream& operator Stack<T>::<<(std::ostream &strm, const Stack &s) {
-	return strm << to_string;
+template <typename T>
+ostream& operator<<(std::ostream &strm, const Stack<T> &s) {
+	for (int i = 0; i < s.size(); i++) {
+		strm << s[i] << " ";
+	}
+
+	return strm;
 }

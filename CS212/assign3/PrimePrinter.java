@@ -1,3 +1,9 @@
+/*
+ * Title:	PrimePrinter.java
+ * Author:	Dilpreet S. Chana
+ * Description:	Print all prime less than a specified number
+**/
+
 import java.util.*;
 
 public class PrimePrinter {

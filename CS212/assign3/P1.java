@@ -1,3 +1,9 @@
+/*
+ * Title:	P1.java
+ * Author:	Dilpreet S. Chana
+ * Description:	Validate a credit card number
+**/
+
 import java.util.*;
 
 public class P1 {
@@ -5,11 +11,14 @@ public class P1 {
 		Scanner kb = new Scanner(System.in);
 
 		String cNum = kb.nextLine();
+
+		// Remove dashes and spaces
 		cNum = cNum.replace(" ", "");
 		cNum = cNum.replace("-", "");
 
 		int check = 0;
 
+		// Execute check algorithm
 		for (int i = 0; i < 16; i++) {
 			int num = Integer.parseInt(cNum.substring(i, i + 1));
 
