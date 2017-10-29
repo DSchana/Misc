@@ -1,101 +1,187 @@
 /*
  * Title:	main.c
  * Author:	Dilpreet S. Chana
- * Description:	Create an image of five squares
- * Usage:	./main image colour_mid colour_top_left colour_top_right colour_bottom_left colour_bottom_right
+ * Description:	Program creates a binary ppm file with the given name.
+ *		The image is of four colour squares in each corner and
+ *		one square in the centre rotated 45 degrees. the colours
+ *		are passed in as consol parameters.
+ *		Optinal usage:
+ *		The size of the image can be passed in along with number
+ *		of children. By default the size is 1000 x 1000 and 10
+ *		children are used to write the image.
 **/
 
-#include <unistd.h>
 #include <fcntl.h>
-#include <stdio.h>
+#include <unistd.h>
 #include <stdlib.h>
+#include <sys/wait.h>
 #include <string.h>
 
-const char* RED = "255 42 26 ";
-const char* GREEN = "87 154 113 ";
-const char* BLUE = "24 154 202 ";
-const char* YELLOW = "203 171 37 ";
-const char* ORANGE = "204 142 36 ";
-const char* CYAN = "124 196 203 ";
-const char* MAGENTA = "203 108 198 ";
-const char* OCEAN = "79 66 181 ";
-const char* VIOLET = "143 0 255 ";
+typedef struct colour{
+	int r;
+	int g;
+	int b;
+} Colour;
 
-int main(int arg_c, char** arg_v) {
-	if (arg_c != 7) return -1;
+void stoc(char* str, Colour* col);  // Convert string to colour
 
-	char** colours = (char**)malloc(5);
+int main(int arg_c, char* arg_v[]) {
+	if (arg_c != 7 && arg_c != 9) exit(1);
 
+	Colour colours[5];
 	for (int i = 0; i < 5; i++) {
-		if (strcmp(arg_v[i + 2], "red") == 0) {
-			colours[i] = (char*)malloc(sizeof(RED));
-			strcpy(colours[i], RED);
-		}
-		else if (strcmp(arg_v[i + 2], "green") == 0) {
-			colours[i] = (char*)malloc(sizeof(GREEN));
-			strcpy(colours[i], GREEN);
-		}
-		else if (strcmp(arg_v[i + 2], "blue") == 0) {
-			colours[i] = (char*)malloc(sizeof(BLUE));
-			strcpy(colours[i], BLUE);
-		}
-		else if (strcmp(arg_v[i + 2], "yellow") == 0) {
-			colours[i] = (char*)malloc(sizeof(YELLOW));
-			strcpy(colours[i], YELLOW);
-		}
-		else if (strcmp(arg_v[i + 2], "orange") == 0) {
-			colours[i] = (char*)malloc(sizeof(ORANGE));
-			strcpy(colours[i], ORANGE);
-		}
-		else if (strcmp(arg_v[i + 2], "cyan") == 0) {
-			colours[i] = (char*)malloc(sizeof(CYAN));
-			strcpy(colours[i], CYAN);
-		}
-		else if (strcmp(arg_v[i + 2], "magenta") == 0) {
-			colours[i] = (char*)malloc(sizeof(MAGENTA));
-			strcpy(colours[i], MAGENTA);
-		}
-		else if (strcmp(arg_v[i + 2], "ocean") == 0) {
-			colours[i] = (char*)malloc(sizeof(OCEAN));
-			strcpy(colours[i], OCEAN);
-		}
-		else if (strcmp(arg_v[i + 2], "violet") == 0) {
-			colours[i] = (char*)malloc(sizeof(VIOLET));
-			strcpy(colours[i], VIOLET);
-		}
-		else {
-			printf("Colour %d is invalid\n", i + 1);
-			return -1;
-		}
+		stoc(arg_v[i + 2], colours + i);
 	}
 
-	// Create image
-	int img = open(arg_v[1], O_WRONLY | O_CREAT | O_TRUNC, 0777);
-	write(img, "P3\n1000 1000\n255\n", 17);
+	int len = 1000, children = 10;
 
-	int pid;
-
-	for (int i = 0; i < 5; i++) {
-		printf("%s\n", colours[i]);
+	// When variable len/len , children entered 
+	if (arg_c == 9) {
+		len = atoi(arg_v[7]) - atoi(arg_v[7]) % 4;
+		children = atoi(arg_v[8]) + atoi(arg_v[8]) % 2;
 	}
 
-	for (int i = 0; i < 10; i++) {
+	int pid, status, v, ed_len;
+	char* name = arg_v[1];
+	char c[3];
+	strcat(name, ".ppm");
+
+	// Writing header to image
+	int new_img = open(name, O_WRONLY | O_CREAT | O_TRUNC, 0777);
+
+	if (arg_c == 7) {
+		char* tmp_s = "P6\n1000 1000\n255\n";
+		write(new_img, tmp_s, strlen(tmp_s));
+		ed_len = strlen(tmp_s);
+	}
+	else {
+		write(new_img, "P6\n", 3);
+		write(new_img, arg_v[7], strlen(arg_v[7]));
+		write(new_img, " ", 1);
+		write(new_img, arg_v[7], strlen(arg_v[7]));
+		write(new_img, "\n255\n", 5);
+		ed_len = 2 * strlen(arg_v[7]) + 9;
+	}
+
+	close(new_img);
+
+	// Loop number of children to write rows
+	for (int i = 0; i < children; i++) {
 		if ((pid = fork()) == 0) {
-			for (int j = 0; j < 1000; j++) {
-				for (int k = 0; k < 1000; k++) {
-					if (k < 500) {
-						write(img, colours[3], sizeof(colours[3]));
+			int new_img = open(name, O_WRONLY, 0777);
+			lseek(new_img, (len / children) * len * 3 * i + ed_len, SEEK_SET);
+
+			// Write one row to the image
+			for (int j = 0; j < (len / children); j++) {
+
+				if (i < children / 2) {
+					*c = colours[1].r;
+					*(c + 1) = colours[1].g;
+					*(c + 2) = colours[1].b;
+
+					for (int k = 0; k < (len / 2); k++) {
+						write(new_img, c, 3);
 					}
-					else {
-						write(img, colours[4], sizeof(colours[4]));
+
+					*c = colours[2].r;
+					*(c + 1) = colours[2].g;
+					*(c + 2) = colours[2].b;
+					for (int k = 0; k < (len / 2); k++) {
+						write(new_img, c, 3);
+					}
+
+					if ((v = 2 * (i * (len / children) + j - (len / 4))) >= 0) {
+						*c = colours[0].r;
+						*(c + 1) = colours[0].g;
+						*(c + 2) = colours[0].b;
+						lseek(new_img, (-1 * len * 3) + (len / 2) * 3 - v * 3 / 2, SEEK_CUR);
+
+						for (int l = 0; l < v; l++) {
+							write(new_img, c, 3);
+						}
+
+						lseek(new_img, len/2*3 - v*3/2, SEEK_CUR);
 					}
 				}
-				write(img, "\n", 1);
+				else {
+					*c = colours[3].r;
+					*(c + 1) = colours[3].g;
+					*(c + 2) = colours[3].b;
+
+					for(int k = 0; k < len / 2; k++) {
+						write(new_img, c, 3);
+					}
+
+					*c = colours[4].r;
+					*(c + 1) = colours[4].g;
+					*(c + 2) = colours[4].b;
+
+					for (int k = 0; k < len / 2; k++) {
+						write(new_img, c, 3);
+					}
+
+					if ((v = 2 * (3 * len / 4 - i * (len / children) - j)) > 0) {
+						*c = colours[0].r;
+						*(c + 1) = colours[0].g;
+						*(c + 2) = colours[0].b;
+						lseek(new_img, (-1 * len * 3) + len / 2 * 3 - v * 3 / 2, SEEK_CUR);
+
+						for(int l=0;l<v;l++){
+							write(new_img, c, 3);
+						}
+
+						lseek(new_img, len / 2 * 3 - v * 3 / 2, SEEK_CUR);
+					}
+				}
 			}
+			close(new_img);
+			exit(0);
 		}
+		wait(&status);
 	}
 
-	close(img);
-
 	return 0;
+}
+
+/*
+ * Description:	Convert string to colour
+ * Parameters:	Pointer to char array: String to convert
+ *		Pointer to Colour:     Location to store converted colour
+ * Returns:	void
+**/
+void stoc(char* str, Colour* col){
+	Colour tmp;
+
+	if(strcmp(str,"red") == 0){
+		tmp = (Colour) { .r = 255, .g = 42, .b = 26 };
+	}
+	else if(strcmp(str,"green") == 0){
+		tmp = (Colour) { .r = 87, .g = 154, .b = 113 };
+	}
+	else if(strcmp(str,"blue") == 0){
+		tmp = (Colour) { .r = 24, .g = 154, .b = 202 };
+	}
+	else if(strcmp(str,"orange") == 0){
+		tmp = (Colour) { .r = 204, .g = 142, .b = 36 };
+	}
+	else if(strcmp(str,"cyan") == 0){
+		tmp = (Colour) { .r = 124, .g = 196, .b = 203 };
+	}
+	else if(strcmp(str,"magenta") == 0){
+		tmp = (Colour) { .r = 203, .g = 108, .b = 198 };
+	}
+	else if(strcmp(str,"ocean") == 0){
+		tmp = (Colour) { .r = 203, .g = 108, .b = 198 };
+	}
+	else if(strcmp(str,"violet") == 0){
+		tmp = (Colour) { .r = 143, .g = 0, .b = 255 };
+	}
+	else if(strcmp(str,"yellow") == 0){
+		tmp = (Colour) { .r = 203, .g = 171, .b = 37 };
+	}
+	else {
+		tmp = (Colour) { .r = 0, .g = 0, .b = 0 };
+	}
+
+	*col = tmp;
 }
