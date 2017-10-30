@@ -1,21 +1,32 @@
 #ifndef P_STACK_H
 #define P_STACK_H
 
-#include <vector>
 #include <iostream>
 
-template <class T>
+template <typename T>
+struct Node<T> {
+	T* data;
+	int priority;
+	Node<T>* next;
+	Node<T>* prev;
+};
+
+template <typename T>
 class PStack {
 private:
-	std::vector<T> elements;
-	int size;
+	Node<T>* head = nullptr;
+	Node<T>* tail = nullptr;
+	int Size = 0;
 
 public:
-	PStack();
-	void push(T e);
-	void push(T e, int p);
-	T pop();
-	T getTop();
+	void enqueue(T e);
+	void enqueue(T e, int p);
+	T* dequeue();
+	T* peek();
+	int size();
+	bool isRegular();
 	bool empty();
-	std::ostream& operator <<(std::ostream &strm, const PStack &s);
+	friend std::ostream& operator <<(std::ostream &strm, const PStack &s);
 };
+
+#endif
