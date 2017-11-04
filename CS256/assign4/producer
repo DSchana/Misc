@@ -1,0 +1,12 @@
+#!/bin/bash
+
+a=`cat storage`
+a=$(($a + 8))
+
+if ((a >= 100))
+	then echo "From producer: I will rest now"
+else
+	echo "From producer: total is $a"
+	echo $a > storage
+	./consumer
+fi

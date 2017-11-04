@@ -6,7 +6,27 @@
 
 #IncludeRegexTransform: 
 
+/Users/DSchana/Documents/GitHub/Misc/CS254/assign3/PStack.cpp
+PStack.h
+/Users/DSchana/Documents/GitHub/Misc/CS254/assign3/PStack.h
+sstream
+-
+string
+-
+cstdio
+-
+
+/Users/DSchana/Documents/GitHub/Misc/CS254/assign3/PStack.h
+iostream
+-
+
 /Users/DSchana/Documents/GitHub/Misc/CS254/assign3/main.cpp
+PStack.h
+/Users/DSchana/Documents/GitHub/Misc/CS254/assign3/PStack.h
+PStack.cpp
+/Users/DSchana/Documents/GitHub/Misc/CS254/assign3/PStack.cpp
+iostream
+-
 cstdio
 -
 
