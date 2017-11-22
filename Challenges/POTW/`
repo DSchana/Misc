@@ -31,14 +31,7 @@ int main () {
 		int x, y, z;
 		scanf("%d %d %d", &x, &y, &z);
 
-		bool found = false;
-		for (int j = 0; j < post_nums.size(); j++) {
-			if (post_nums[j] == y) {
-				found = true;
-				break;
-			}
-		}
-		if (!found) {
+		if (find(post_nums.begin(), post_nums.end(), y) != post_nums.end() && post_nums[post_nums.size() - 1] != y) {
 			post_nums.push_back(y);
 		}
 
@@ -56,8 +49,11 @@ int main () {
 		}
 	}
 
+	printf("num posts: %lu\n", post_nums.size());
 	for (int i = 0; i < post_nums.size(); i++) {
+		printf("%d %d\n", i, post_nums[i]);
 		if (s[post_nums[i]] >= t) {
+			printf("Here: ");
 			printf("%d\n", post_nums[i]);
 		}
 	}
