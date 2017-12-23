@@ -1,0 +1,1 @@
+The algorithm makes the locally optimally choice at each stage hoping to find a global optimum, therefore the algorithm is considered a greedy algorithm.

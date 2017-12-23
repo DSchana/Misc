@@ -1,5 +1,5 @@
 public class DefaultFormatter implements NumberFormatter {
-	public static String format(int n) {
+	public String format(int n) {
 		return "" + n;
 	}
 }

@@ -1,0 +1,3 @@
+Stable: Insertion Sort, Merge Sort, Bubble Sort
+Unstable: Quick Sort
+You can make an algorithm stable by mapping the array into an array of pairs. This allows quicker access time and O(n) space.

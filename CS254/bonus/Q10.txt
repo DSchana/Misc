@@ -1,0 +1,1 @@
+The Binary Search Tree can be defined within a class which keeps track of depth as the elements are added. Using a getter method for this variable, the search for max depth of any tree if O(1).

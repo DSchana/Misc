@@ -1,0 +1,9 @@
+To compile file on Cygwin or Linux Terminal:
+
+$ javac MyClass.java
+$ java MyClass
+
+to run with arguments:
+
+$ javac MyClass.java
+$ java MyClass firstArgs -v thirdargs
