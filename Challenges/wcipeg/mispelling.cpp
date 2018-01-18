@@ -20,13 +20,12 @@ int main() {
 
 	for (int i = 0; i < n; i++) {
 		p[i] -= 1;
-		if (p[i] > strlen(s[i]) - 1 || p[i] < 0) {  // Out of bounds
-			continue;
-		}
+		/*
 		if (p[i] == strlen(s[i]) - 1) {
 			s[i][strlen(s[i]) - 1] = '\0';
 			continue;
 		}
+		*/
 
 		copy((s[i] + p[i] + 1), (s[i] + strlen(s[i])), (s[i] + p[i]));
 		s[i][strlen(s[i]) - 1] = '\0';

@@ -1,0 +1,7 @@
+total
+sum
+average
+_x
+y_
+mark_1
+x1

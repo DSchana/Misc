@@ -1,0 +1,15 @@
+int celTofah(int cel)
+{
+    int fah;
+    fah = 1.8*cel+32;
+    return fah;
+}
+
+int main()
+{
+	int cel, fah;
+	cel = 25;
+	fah = celTofah(cel);
+	printf("Fah: %d", fah);
+	return 0;
+}
