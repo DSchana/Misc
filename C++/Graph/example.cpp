@@ -6,6 +6,8 @@ using namespace std;
 int main() {
 	Graph g(5);
 
+	g.t;
+
 	g.connect(0, 4);
 	g.connect(1, 2);
 	g.connect(1, 3, 2);

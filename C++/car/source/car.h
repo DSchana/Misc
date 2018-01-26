@@ -9,7 +9,6 @@ using namespace std;
 
 namespace test {
 	class Car {
-	private:
 		string model;
 		int hp;
 		int speed;

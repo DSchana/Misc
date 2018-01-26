@@ -12,6 +12,7 @@ struct Node {
 };
 
 class Graph {
+	int t;
 private:
 	std::vector<Node*> nodes;
 
