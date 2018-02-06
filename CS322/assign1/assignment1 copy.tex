@@ -1,0 +1,73 @@
+\documentclass[letter,english,12pt,svgnames,titlepage]{report}
+
+\usepackage{adjustbox}
+\usepackage{babel}
+\usepackage{tikz}
+\usepackage{tikz-uml}
+\usetikzlibrary{positioning}
+
+\begin{document}
+	\date{Febuary 5, 2018}
+	\title{Assignment 1 60-322}
+	\author{Arshdeep Sidhu 104567665}
+	\maketitle
+	\clearpage
+	\begin{adjustbox}{max totalsize = {.9\textwidth}{.8\textheight},center}
+		\begin{tikzpicture}
+			\umlclass[x=0,y=0]{Main}{
+				-args: String [] \\
+			}{
+				\umlstatic{+main(args: String []): void} \\
+			}
+			\begin{umlpackage}[x=0,y=0]{cs322}
+				\umlclass[x=0,y=-6,type=abstract]{Animal}{
+					-name: String \\
+				}{
+					+toString(): String \\
+					\umlvirt{make\_noise(): String} \\
+				}
+
+				\umlVHVinherit{Animal}{Main}
+				
+				\umlclass[x=-3,y=-11]{Cat}{}{
+					+toString(): String\\
+				}
+				
+				\umlVHVinherit{Cat}{Animal}
+				
+				\umlclass[x=3,y=-11]{Dog}{}{
+					+toString(): String \\
+				}		
+				
+				\umlVHVinherit{Dog}{Animal}
+			
+			\end{umlpackage}
+
+		\end{tikzpicture}
+
+		
+	\end{adjustbox}
+	\clearpage
+	\begin{adjustbox}{max totalsize = {.9\textwidth}{.8\textheight},center}
+		\begin{tikzpicture}
+			\begin{umlseqdiag}
+				\umlobject[no ddots]{main}
+				\umlobject[no ddots]{out}
+				\umlcreatecall[class=ArrayList$<$Animal$>$]{main}{animal}
+				\umlcreatecall[class=Cat,dt=4]{main}{bell}
+					\begin{umlcall}[op={Add()},dt=4]{bell}{animal}
+					\end{umlcall}
+				\umlcreatecall[class=Dog,dt=8]{main}{max}
+					\begin{umlcall}[op={Add()},dt=4]{max}{animal}
+					\end{umlcall}
+				\umlcreatecall[class=Cat,dt=8]{main}{pedro}
+					\begin{umlcall}[op={Add()},dt=4]{pedro}{animal}
+					\end{umlcall}
+				\begin{umlfragment}[type=loop,name=tmp,label={a $\in$ animal},inner xsep=6,inner ysep=6]
+					\begin{umlcall}[op={println(a)},dt=12]{animal}{out}
+					\end{umlcall}
+				\end{umlfragment}				
+			\end{umlseqdiag}	
+		\end{tikzpicture}	
+	\end{adjustbox}
+\end{document}

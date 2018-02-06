@@ -1,0 +1,43 @@
+\documentclass[letter, english, 11pt, svgnames, titlepage]{report}
+
+\usepackage{authblk}
+\usepackage[utf8]{inputenc}
+\usepackage{adjustbox}
+\usepackage{babel}
+\usepackage{tikz}
+\usepackage{tikz-uml}
+\usetikzlibrary{positioning}
+
+\begin{document}
+	\title{Assignment 1}
+	\author{Dilpreet S. Chana}
+	\affil{104570850}
+	\date{February 3, 2018}
+	\maketitle
+	\clearpage
+
+	\begin{tikzpicture}
+		\begin{umlpackage}{mypackage}
+			\umlclass[x=3, y=0]{Animal}{}{
+				\umlvirt{+Animal(aName: String)} \\
+				\umlvirt{+make\_noise() : void} \\
+				\umlvirt{+toString() :String } \\
+			}
+
+			\umlclass[x=0, y=-3]{Cat}{}{}
+			\umlinherit[geometry=-|]{Cat}{Animal}
+
+			\umlclass[x=5, y=-3]{Dog}{}{}
+			\umlinherit[]{Dog}{Animal}
+		\end{umlpackage}
+	\end{tikzpicture}
+	\clearpage
+
+	\begin{tikzpicture}
+		\begin{umlseqdiag}
+			\umlobject[class=ArrayList<Animal>]{animals}
+			\begin{umlcallself}[op={add("Bell")}]{animals}
+			\end{umlcallself}
+		\end{umlseqdiag}
+	\end{tikzpicture}
+\end{document}

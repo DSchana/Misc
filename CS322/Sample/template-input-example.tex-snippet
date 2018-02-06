@@ -1,0 +1,11 @@
+\begin{tikzpicture}
+  \begin{umlpackage}{mypackage}
+    \umlclass[x=0,y=0]{Animal}{}{
+      \umlvirt{+is\_alive(): bool} \\
+      \umlvirt{+move(x: float, y: float) : void} \\
+      \umlvirt{+make\_noise(): void} \\
+    }
+    \umlclass[x=0,y=-3]{Cat}{}{}
+    \umlinherit[geometry=-|]{Cat}{Animal}
+  \end{umlpackage}
+\end{tikzpicture}
