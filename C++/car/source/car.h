@@ -5,6 +5,8 @@
 #include <cmath>
 #include <map>
 
+#define CAR_VAR 666
+
 using namespace std;
 
 namespace test {
