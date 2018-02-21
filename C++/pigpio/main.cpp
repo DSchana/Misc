@@ -11,6 +11,8 @@ int main() {
 
 	gpioPWM(12, 128);
 	time_sleep(5);
+	gpioPWM(12, 255);
+	time_sleep(5);
 	gpioPWM(12, 0);
 
 	gpioTerminate();
