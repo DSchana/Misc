@@ -9,11 +9,14 @@ int main() {
 	gpioSetMode(12, PI_OUTPUT);
 	gpioSetPWMfrequency(12, 333);
 
-	gpioPWM(12, 128);
+	gpioPWM(12, 128);  // Talon OFF
 	time_sleep(5);
-	gpioPWM(12, 255);
+	gpioPWM(12, 85);  // Talon MAX REV
 	time_sleep(5);
-	gpioPWM(12, 0);
+	gpioPWM(12, 170);  // Talon MAX FORW
+	time_sleep(5)
+	gpioPWM(12, 128);  // Talon OFF
+	time_sleep(10);
 
 	gpioTerminate();
 
