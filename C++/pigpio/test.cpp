@@ -2,6 +2,8 @@
 #include <iostream>
 #include <pigpio.h>
 
+#define PIN 18
+
 using namespace std;
 
 int main() {
@@ -10,18 +12,18 @@ int main() {
 	cout << "START..." << endl;
 	gpioInitialise();
 
-	gpioSetMode(12, PI_OUTPUT);
-	gpioSetPWMfrequency(12, 333);
-	gpioPWM(12, 0);
+	gpioSetMode(PIN, PI_OUTPUT);
+	gpioSetPWMfrequency(PIN, 333);
+	gpioPWM(PIN, 0);
 
 	while (true) {
 		cin >> in;
 		if (in == -1) break;
 
-		gpioPWM(12, in);
+		gpioPWM(PIN, in);
 	}
 
-	gpioPWM(12, 0);
+	gpioPWM(PIN, 0);
 
 	gpioTerminate();
 
