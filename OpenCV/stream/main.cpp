@@ -10,7 +10,7 @@ int main() {
 	Mat frame1, frame2;
 
 	cap1.set(CV_CAP_PROP_FRAME_WIDTH, 640);
-	cap1.set(CV_CAP_PROP_FRAME_HEIGHT, 480);
+	cap1.set(CV_CAP_PROP_FRAME_HEIGHT, 360);
 	//cap2.set(CV_CAP_PROP_FRAME_WIDTH, 640);
 	//cap2.set(CV_CAP_PROP_FRAME_HEIGHT, 480);
 
