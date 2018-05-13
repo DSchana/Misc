@@ -30,6 +30,7 @@ int main(int argc, char *argv[])
 
 	// start listening, allowing a queue of up to 1 pending connection
 	listen(mysocket, 1);
+
 	int consocket = accept(mysocket, (struct sockaddr *)&dest, &socksize);
   
 	while (consocket) {
@@ -37,8 +38,8 @@ int main(int argc, char *argv[])
 		recv(consocket, buf, 9, 0);
 		printf("Incoming connection from %s - sending welcome - %s\n", inet_ntoa(dest.sin_addr), buf);
 		send(consocket, msg, strlen(msg), 0); 
-		close(consocket);
-		consocket = accept(mysocket, (struct sockaddr *)&dest, &socksize);
+		//close(consocket);
+		//consocket = accept(mysocket, (struct sockaddr *)&dest, &socksize);
 	}
 
 	close(mysocket);
