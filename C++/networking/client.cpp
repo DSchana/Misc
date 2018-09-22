@@ -18,15 +18,15 @@ int main() {
 	int len, mysocket;
 	struct sockaddr_in dest; 
 
-	//for (int i = 0; i < 10; i++) { 
-		mysocket = socket(AF_INET, SOCK_STREAM, 0);
+	mysocket = socket(AF_INET, SOCK_STREAM, 0);
 
-		memset(&dest, 0, sizeof(dest));  // zero the struct
-		dest.sin_family = AF_INET;
-		dest.sin_addr.s_addr = inet_addr("127.0.0.1");  // set destination IP number - localhost, 127.0.0.1
-		dest.sin_port = htons(PORTNUM);  // set destination port number
+	memset(&dest, 0, sizeof(dest));  // zero the struct
+	dest.sin_family = AF_INET;
+	dest.sin_addr.s_addr = inet_addr("127.0.0.1");  // set destination IP number - localhost, 127.0.0.1
+	dest.sin_port = htons(PORTNUM);  // set destination port number
 
-		connect(mysocket, (struct sockaddr *)&dest, sizeof(struct sockaddr_in));
+	connect(mysocket, (struct sockaddr *)&dest, sizeof(struct sockaddr_in));
+
 	for (int i = 0; i < 10; i++) {
 		send(mysocket, "Hi\n", 3, 0);
 		len = recv(mysocket, buffer, MAXRCVLEN, 0);

@@ -32,14 +32,23 @@ int main(int argc, char *argv[])
 	listen(mysocket, 1);
 
 	int consocket = accept(mysocket, (struct sockaddr *)&dest, &socksize);
-  
+
 	while (consocket) {
+		printf("%d\n", consocket);
 		char buf[10];
-		recv(consocket, buf, 9, 0);
+		send(consocket, msg, strlen(msg), 0);
+
+		pid_t pid = fork();
+
+		if (pid == 0) {
+			sleep(5);
+		}
+		else {
+			recv(consocket, buf, 9, 0);
+			kill(pid);
+		}
+
 		printf("Incoming connection from %s - sending welcome - %s\n", inet_ntoa(dest.sin_addr), buf);
-		send(consocket, msg, strlen(msg), 0); 
-		//close(consocket);
-		//consocket = accept(mysocket, (struct sockaddr *)&dest, &socksize);
 	}
 
 	close(mysocket);
