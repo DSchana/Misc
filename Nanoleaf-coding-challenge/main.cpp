@@ -66,11 +66,14 @@ int main(int arg_c, char** arg_v) {
 	srand(time(NULL));
 
 	// Select to_select number of randdom lights
+	int removed = 0;
 	for (int i = 0; i < to_select; i++) {
-		int l = rand() % tot_lights;
+		int l = rand() % (tot_lights - removed);
 
 		if (find(unique_cols.begin(), unique_cols.end(), light_access[l]) == unique_cols.end()) {
 			unique_cols.push_back(light_access[l]);
+			light_access.erase(light_access.begin() + l);
+			removed++;
 		}
 	}
 
@@ -82,8 +85,10 @@ int main(int arg_c, char** arg_v) {
 	// Probabalistic count of each colour's selection. Using m/N as a weighted average of each
 	// colour being selected. Where m is the redundant count of that colour and N is the total
 	// lights avaliable
+	int c = 1;  // Number of times looped
 	for (auto it = light_count.begin(); it != light_count.end(); it++) {
-		avg += 1.0 - pow(1.0 - it->second / float(tot_lights), to_select);
+		avg += 1.0 - pow(1.0 - it->second / float(tot_lights - c), to_select - c);
+		c++;
 	}
 
 	cout << "The average expected number of unique colours from this simulation is " << avg << " colours" << endl;
