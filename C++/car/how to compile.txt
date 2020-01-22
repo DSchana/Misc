@@ -1,1 +1,0 @@
-g++ car\ test.cpp car.cpp -o car\ test
