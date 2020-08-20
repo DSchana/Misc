@@ -43,5 +43,10 @@ Temporary Items
 .apdisk
 
 # IDEs folders
-.vscode
-.idea
+.vscode/
+.idea/
+*.swp
+
+# Build folders
+build/
+cmake-build-debug/
