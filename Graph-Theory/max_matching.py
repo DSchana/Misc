@@ -1,3 +1,12 @@
+import networkx as nx
+import matplotlib.pyplot as plt
+
+def renderGraph(X, Y, E):
+    G = nx.Graph()
+    G.add_nodes_from(X)
+    G.add_nodes_from(Y)
+    G.add_edges_from(E)
+
 def maxMatching(X, Y, E):
     '''
     X - First partite set with vertices labeled with numbers
